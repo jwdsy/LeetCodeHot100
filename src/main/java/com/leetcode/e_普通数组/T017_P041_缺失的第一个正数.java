@@ -14,35 +14,35 @@ import java.util.*;
  */
 public class T017_P041_缺失的第一个正数 {
 
-  public static void main(String[] args) {
-    T017_P041_缺失的第一个正数 solution = new T017_P041_缺失的第一个正数();
+    public static void main(String[] args) {
+        T017_P041_缺失的第一个正数 solution = new T017_P041_缺失的第一个正数();
 
-    // 测试示例: nums = [3,4,-1,1]
-    int[] nums = {3, 4, -1, 1};
-    int result = solution.firstMissingPositive(nums);
-    System.out.println("输入: nums = [3,4,-1,1]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public int firstMissingPositive(int[] nums) {
-    int n = nums.length;
-
-    for (int i = 0; i < n; i++) {
-      while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {
-        int idx = nums[i] - 1;
-        int temp = nums[idx];
-        nums[idx] = nums[i];
-        nums[i] = temp;
-      }
+        // 测试示例: nums = [3,4,-1,1]
+        int[] nums = {3, 4, -1, 1};
+        int result = solution.firstMissingPositive(nums);
+        System.out.println("输入: nums = [3,4,-1,1]");
+        System.out.println("输出: " + result);
     }
 
-    for (int i = 0; i < n; i++) {
-      if (nums[i] != i + 1) {
-        return i + 1;
-      }
-    }
+    // 解题代码
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;
 
-    return n + 1;
-  }
+        for (int i = 0; i < n; i++) {
+            while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {
+                int idx = nums[i] - 1;
+                int temp = nums[idx];
+                nums[idx] = nums[i];
+                nums[i] = temp;
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] != i + 1) {
+                return i + 1;
+            }
+        }
+
+        return n + 1;
+    }
 }

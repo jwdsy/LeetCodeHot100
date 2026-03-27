@@ -1,6 +1,7 @@
 package com.leetcode.h_二叉树;
 
 import com.leetcode.util.TreeNode;
+
 import java.util.*;
 
 /**
@@ -14,35 +15,35 @@ import java.util.*;
  */
 public class T044_P230_二叉搜索树中第K小的元素 {
 
-  public static void main(String[] args) {
-    T044_P230_二叉搜索树中第K小的元素 solution = new T044_P230_二叉搜索树中第K小的元素();
+    public static void main(String[] args) {
+        T044_P230_二叉搜索树中第K小的元素 solution = new T044_P230_二叉搜索树中第K小的元素();
 
-    TreeNode root = new TreeNode(3);
-    root.left = new TreeNode(1);
-    root.right = new TreeNode(4);
-    root.left.right = new TreeNode(2);
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(4);
+        root.left.right = new TreeNode(2);
 
-    int k = 1;
-    int result = solution.kthSmallest(root, k);
-    System.out.println("k = " + k + ", 输出: " + result);
-  }
-
-  // 解题代码
-  public int kthSmallest(TreeNode root, int k) {
-    Stack<TreeNode> stack = new Stack<>();
-    TreeNode curr = root;
-
-    while (!stack.isEmpty() || curr != null) {
-      while (curr != null) {
-        stack.push(curr);
-        curr = curr.left;
-      }
-      curr = stack.pop();
-      k--;
-      if (k == 0) return curr.val;
-      curr = curr.right;
+        int k = 1;
+        int result = solution.kthSmallest(root, k);
+        System.out.println("k = " + k + ", 输出: " + result);
     }
 
-    return -1;
-  }
+    // 解题代码
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+
+        while (!stack.isEmpty() || curr != null) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            k--;
+            if (k == 0) return curr.val;
+            curr = curr.right;
+        }
+
+        return -1;
+    }
 }

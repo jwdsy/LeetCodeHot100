@@ -13,28 +13,28 @@ import java.util.*;
  */
 public class T074_P215_数组中的第K个最大元素 {
 
-  public int findKthLargest(int[] nums, int k) {
-    // 最小堆
-    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    public int findKthLargest(int[] nums, int k) {
+        // 最小堆
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
 
-    for (int num : nums) {
-      minHeap.offer(num);
-      if (minHeap.size() > k) {
-        minHeap.poll();
-      }
+        for (int num : nums) {
+            minHeap.offer(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+
+        return minHeap.peek();
     }
 
-    return minHeap.peek();
-  }
+    public static void main(String[] args) {
+        T074_P215_数组中的第K个最大元素 solution = new T074_P215_数组中的第K个最大元素();
 
-  public static void main(String[] args) {
-    T074_P215_数组中的第K个最大元素 solution = new T074_P215_数组中的第K个最大元素();
+        // 测试用例
+        int[] nums1 = {3, 2, 1, 5, 6, 4};
+        System.out.println("测试1: " + solution.findKthLargest(nums1, 2) + " (期望: 5)");
 
-    // 测试用例
-    int[] nums1 = {3, 2, 1, 5, 6, 4};
-    System.out.println("测试1: " + solution.findKthLargest(nums1, 2) + " (期望: 5)");
-
-    int[] nums2 = {3, 2, 3, 1, 2, 4, 5, 5, 6};
-    System.out.println("测试2: " + solution.findKthLargest(nums2, 4) + " (期望: 4)");
-  }
+        int[] nums2 = {3, 2, 3, 1, 2, 4, 5, 5, 6};
+        System.out.println("测试2: " + solution.findKthLargest(nums2, 4) + " (期望: 4)");
+    }
 }

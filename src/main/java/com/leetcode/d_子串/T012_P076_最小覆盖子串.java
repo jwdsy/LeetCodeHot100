@@ -14,62 +14,62 @@ import java.util.*;
  */
 public class T012_P076_最小覆盖子串 {
 
-  public static void main(String[] args) {
-    T012_P076_最小覆盖子串 solution = new T012_P076_最小覆盖子串();
+    public static void main(String[] args) {
+        T012_P076_最小覆盖子串 solution = new T012_P076_最小覆盖子串();
 
-    // 测试示例: s = "ADOBECODEBANC", t = "ABC"
-    String s = "ADOBECODEBANC";
-    String t = "ABC";
-    String result = solution.minWindow(s, t);
-    System.out.println("输入: s = \"ADOBECODEBANC\", t = \"ABC\"");
-    System.out.println("输出: \"" + result + "\"");
-  }
-
-  // 解题代码
-  public String minWindow(String s, String t) {
-    if (s == null || t == null || s.length() < t.length()) return "";
-
-    int[] need = new int[128];
-    int[] window = new int[128];
-
-    for (char c : t.toCharArray()) {
-      need[c]++;
+        // 测试示例: s = "ADOBECODEBANC", t = "ABC"
+        String s = "ADOBECODEBANC";
+        String t = "ABC";
+        String result = solution.minWindow(s, t);
+        System.out.println("输入: s = \"ADOBECODEBANC\", t = \"ABC\"");
+        System.out.println("输出: \"" + result + "\"");
     }
 
-    int left = 0, right = 0;
-    int valid = 0;
-    int start = 0;
-    int minLen = Integer.MAX_VALUE;
+    // 解题代码
+    public String minWindow(String s, String t) {
+        if (s == null || t == null || s.length() < t.length()) return "";
 
-    while (right < s.length()) {
-      char c = s.charAt(right);
-      right++;
+        int[] need = new int[128];
+        int[] window = new int[128];
 
-      if (need[c] > 0) {
-        window[c]++;
-        if (window[c] == need[c]) {
-          valid++;
-        }
-      }
-
-      while (valid == need.length) {
-        if (right - left < minLen) {
-          start = left;
-          minLen = right - left;
+        for (char c : t.toCharArray()) {
+            need[c]++;
         }
 
-        char d = s.charAt(left);
-        left++;
+        int left = 0, right = 0;
+        int valid = 0;
+        int start = 0;
+        int minLen = Integer.MAX_VALUE;
 
-        if (need[d] > 0) {
-          if (window[d] == need[d]) {
-            valid--;
-          }
-          window[d]--;
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            right++;
+
+            if (need[c] > 0) {
+                window[c]++;
+                if (window[c] == need[c]) {
+                    valid++;
+                }
+            }
+
+            while (valid == need.length) {
+                if (right - left < minLen) {
+                    start = left;
+                    minLen = right - left;
+                }
+
+                char d = s.charAt(left);
+                left++;
+
+                if (need[d] > 0) {
+                    if (window[d] == need[d]) {
+                        valid--;
+                    }
+                    window[d]--;
+                }
+            }
         }
-      }
+
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
     }
-
-    return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
-  }
 }

@@ -14,25 +14,25 @@ import java.util.*;
  */
 public class T002_P049_字母异位词分组 {
 
-  public static void main(String[] args) {
-    T002_P049_字母异位词分组 solution = new T002_P049_字母异位词分组();
+    public static void main(String[] args) {
+        T002_P049_字母异位词分组 solution = new T002_P049_字母异位词分组();
 
-    // 测试示例: strs = ["eat","tea","tan","ate","nat","bat"]
-    String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
-    List<List<String>> result = solution.groupAnagrams(strs);
-    System.out.println("输入: strs = [\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\"]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public List<List<String>> groupAnagrams(String[] strs) {
-    java.util.Map<String, List<String>> map = new java.util.HashMap<>();
-    for (String str : strs) {
-      char[] charArray = str.toCharArray();
-      java.util.Arrays.sort(charArray);
-      String sortedStr = new String(charArray);
-      map.computeIfAbsent(sortedStr, k -> new java.util.ArrayList<>()).add(str);
+        // 测试示例: strs = ["eat","tea","tan","ate","nat","bat"]
+        String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+        List<List<String>> result = solution.groupAnagrams(strs);
+        System.out.println("输入: strs = [\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\"]");
+        System.out.println("输出: " + result);
     }
-    return new java.util.ArrayList<>(map.values());
-  }
+
+    // 解题代码
+    public List<List<String>> groupAnagrams(String[] strs) {
+        java.util.Map<String, List<String>> map = new java.util.HashMap<>();
+        for (String str : strs) {
+            char[] charArray = str.toCharArray();
+            java.util.Arrays.sort(charArray);
+            String sortedStr = new String(charArray);
+            map.computeIfAbsent(sortedStr, k -> new java.util.ArrayList<>()).add(str);
+        }
+        return new java.util.ArrayList<>(map.values());
+    }
 }

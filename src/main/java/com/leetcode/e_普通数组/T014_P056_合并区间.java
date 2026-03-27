@@ -14,35 +14,35 @@ import java.util.*;
  */
 public class T014_P056_合并区间 {
 
-  public static void main(String[] args) {
-    T014_P056_合并区间 solution = new T014_P056_合并区间();
+    public static void main(String[] args) {
+        T014_P056_合并区间 solution = new T014_P056_合并区间();
 
-    // 测试示例: intervals = [[1,3],[2,6],[8,10],[15,18]]
-    int[][] intervals = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
-    int[][] result = solution.merge(intervals);
-    System.out.println("输入: intervals = [[1,3],[2,6],[8,10],[15,18]]");
-    System.out.println("输出: " + Arrays.deepToString(result));
-  }
-
-  // 解题代码
-  public int[][] merge(int[][] intervals) {
-    if (intervals == null || intervals.length == 0) return new int[0][];
-
-    Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
-
-    List<int[]> merged = new ArrayList<>();
-    int[] current = intervals[0];
-    merged.add(current);
-
-    for (int i = 1; i < intervals.length; i++) {
-      if (intervals[i][0] <= current[1]) {
-        current[1] = Math.max(current[1], intervals[i][1]);
-      } else {
-        current = intervals[i];
-        merged.add(current);
-      }
+        // 测试示例: intervals = [[1,3],[2,6],[8,10],[15,18]]
+        int[][] intervals = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
+        int[][] result = solution.merge(intervals);
+        System.out.println("输入: intervals = [[1,3],[2,6],[8,10],[15,18]]");
+        System.out.println("输出: " + Arrays.deepToString(result));
     }
 
-    return merged.toArray(new int[merged.size()][]);
-  }
+    // 解题代码
+    public int[][] merge(int[][] intervals) {
+        if (intervals == null || intervals.length == 0) return new int[0][];
+
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+
+        List<int[]> merged = new ArrayList<>();
+        int[] current = intervals[0];
+        merged.add(current);
+
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] <= current[1]) {
+                current[1] = Math.max(current[1], intervals[i][1]);
+            } else {
+                current = intervals[i];
+                merged.add(current);
+            }
+        }
+
+        return merged.toArray(new int[merged.size()][]);
+    }
 }

@@ -11,26 +11,26 @@ package com.leetcode.b_双指针;
  */
 public class T004_P283_移动零 {
 
-  public static void main(String[] args) {
-    T004_P283_移动零 solution = new T004_P283_移动零();
+    public static void main(String[] args) {
+        T004_P283_移动零 solution = new T004_P283_移动零();
 
-    // 测试示例: nums = [0,1,0,3,12]
-    int[] nums = {0, 1, 0, 3, 12};
-    solution.moveZeroes(nums);
-    System.out.println("输入: nums = [0,1,0,3,12]");
-    System.out.println("输出: " + java.util.Arrays.toString(nums));
-  }
-
-  // 解题代码
-  public void moveZeroes(int[] nums) {
-    int left = 0;
-    for (int right = 0; right < nums.length; right++) {
-      if (nums[right] != 0) {
-        int temp = nums[left];
-        nums[left] = nums[right];
-        nums[right] = temp;
-        left++;
-      }
+        // 测试示例: nums = [0,1,0,3,12]
+        int[] nums = {0, 1, 0, 3, 12};
+        solution.moveZeroes(nums);
+        System.out.println("输入: nums = [0,1,0,3,12]");
+        System.out.println("输出: " + java.util.Arrays.toString(nums));
     }
-  }
+
+    // 解题代码
+    public void moveZeroes(int[] nums) {
+        int left = 0;
+        for (int right = 0; right < nums.length; right++) {
+            if (nums[right] != 0) {
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+                left++;
+            }
+        }
+    }
 }

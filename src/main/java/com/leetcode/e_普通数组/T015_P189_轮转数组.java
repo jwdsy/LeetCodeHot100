@@ -14,36 +14,36 @@ import java.util.*;
  */
 public class T015_P189_轮转数组 {
 
-  public static void main(String[] args) {
-    T015_P189_轮转数组 solution = new T015_P189_轮转数组();
+    public static void main(String[] args) {
+        T015_P189_轮转数组 solution = new T015_P189_轮转数组();
 
-    // 测试示例: nums = [1,2,3,4,5,6,7], k = 3
-    int[] nums = {1, 2, 3, 4, 5, 6, 7};
-    int k = 3;
-    solution.rotate(nums, k);
-    System.out.println("输入: nums = [1,2,3,4,5,6,7], k = 3");
-    System.out.println("输出: " + Arrays.toString(nums));
-  }
-
-  // 解题代码
-  public void rotate(int[] nums, int k) {
-    if (nums == null || nums.length <= 1) return;
-
-    int n = nums.length;
-    k = k % n;
-
-    reverse(nums, 0, n - 1);
-    reverse(nums, 0, k - 1);
-    reverse(nums, k, n - 1);
-  }
-
-  private void reverse(int[] nums, int left, int right) {
-    while (left < right) {
-      int temp = nums[left];
-      nums[left] = nums[right];
-      nums[right] = temp;
-      left++;
-      right--;
+        // 测试示例: nums = [1,2,3,4,5,6,7], k = 3
+        int[] nums = {1, 2, 3, 4, 5, 6, 7};
+        int k = 3;
+        solution.rotate(nums, k);
+        System.out.println("输入: nums = [1,2,3,4,5,6,7], k = 3");
+        System.out.println("输出: " + Arrays.toString(nums));
     }
-  }
+
+    // 解题代码
+    public void rotate(int[] nums, int k) {
+        if (nums == null || nums.length <= 1) return;
+
+        int n = nums.length;
+        k = k % n;
+
+        reverse(nums, 0, n - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, n - 1);
+    }
+
+    private void reverse(int[] nums, int left, int right) {
+        while (left < right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
+    }
 }

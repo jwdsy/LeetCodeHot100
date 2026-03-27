@@ -1,6 +1,7 @@
 package com.leetcode.h_二叉树;
 
 import com.leetcode.util.TreeNode;
+
 import java.util.*;
 
 /**
@@ -14,23 +15,23 @@ import java.util.*;
  */
 public class T037_P104_二叉树的最大深度 {
 
-  public static void main(String[] args) {
-    T037_P104_二叉树的最大深度 solution = new T037_P104_二叉树的最大深度();
+    public static void main(String[] args) {
+        T037_P104_二叉树的最大深度 solution = new T037_P104_二叉树的最大深度();
 
-    TreeNode root = new TreeNode(3);
-    root.left = new TreeNode(9);
-    root.right = new TreeNode(20);
-    root.right.left = new TreeNode(15);
-    root.right.right = new TreeNode(7);
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
 
-    int result = solution.maxDepth(root);
-    System.out.println("输入: root = [3,9,20,null,null,15,7]");
-    System.out.println("输出: " + result);
-  }
+        int result = solution.maxDepth(root);
+        System.out.println("输入: root = [3,9,20,null,null,15,7]");
+        System.out.println("输出: " + result);
+    }
 
-  // 解题代码
-  public int maxDepth(TreeNode root) {
-    if (root == null) return 0;
-    return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
-  }
+    // 解题代码
+    public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
 }

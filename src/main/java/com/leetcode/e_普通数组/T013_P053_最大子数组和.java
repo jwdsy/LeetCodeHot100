@@ -12,26 +12,26 @@ package com.leetcode.e_普通数组;
  */
 public class T013_P053_最大子数组和 {
 
-  public static void main(String[] args) {
-    T013_P053_最大子数组和 solution = new T013_P053_最大子数组和();
+    public static void main(String[] args) {
+        T013_P053_最大子数组和 solution = new T013_P053_最大子数组和();
 
-    // 测试示例: nums = [-2,1,-3,4,-1,2,1,-5,4]
-    int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-    int result = solution.maxSubArray(nums);
-    System.out.println("输入: nums = [-2,1,-3,4,-1,2,1,-5,4]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public int maxSubArray(int[] nums) {
-    int maxSum = nums[0];
-    int currentSum = nums[0];
-
-    for (int i = 1; i < nums.length; i++) {
-      currentSum = Math.max(nums[i], currentSum + nums[i]);
-      maxSum = Math.max(maxSum, currentSum);
+        // 测试示例: nums = [-2,1,-3,4,-1,2,1,-5,4]
+        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        int result = solution.maxSubArray(nums);
+        System.out.println("输入: nums = [-2,1,-3,4,-1,2,1,-5,4]");
+        System.out.println("输出: " + result);
     }
 
-    return maxSum;
-  }
+    // 解题代码
+    public int maxSubArray(int[] nums) {
+        int maxSum = nums[0];
+        int currentSum = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            currentSum = Math.max(nums[i], currentSum + nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        return maxSum;
+    }
 }

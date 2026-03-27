@@ -14,42 +14,42 @@ import java.util.*;
  */
 public class T076_P295_数据流的中位数 {
 
-  PriorityQueue<Integer> left; // 最大堆，存较小的一半
-  PriorityQueue<Integer> right; // 最小堆，存较大的一半
+    PriorityQueue<Integer> left; // 最大堆，存较小的一半
+    PriorityQueue<Integer> right; // 最小堆，存较大的一半
 
-  public T076_P295_数据流的中位数() {
-    left = new PriorityQueue<>((a, b) -> b - a);
-    right = new PriorityQueue<>();
-  }
-
-  public void addNum(int num) {
-    // 先加入最大堆
-    left.offer(num);
-    // 平衡两个堆
-    right.offer(left.poll());
-
-    // 确保左堆 >= 右堆
-    if (left.size() < right.size()) {
-      left.offer(right.poll());
+    public T076_P295_数据流的中位数() {
+        left = new PriorityQueue<>((a, b) -> b - a);
+        right = new PriorityQueue<>();
     }
-  }
 
-  public double findMedian() {
-    if (left.size() > right.size()) {
-      return left.peek();
+    public void addNum(int num) {
+        // 先加入最大堆
+        left.offer(num);
+        // 平衡两个堆
+        right.offer(left.poll());
+
+        // 确保左堆 >= 右堆
+        if (left.size() < right.size()) {
+            left.offer(right.poll());
+        }
     }
-    return (left.peek() + right.peek()) / 2.0;
-  }
 
-  public static void main(String[] args) {
-    T076_P295_数据流的中位数 solution = new T076_P295_数据流的中位数();
+    public double findMedian() {
+        if (left.size() > right.size()) {
+            return left.peek();
+        }
+        return (left.peek() + right.peek()) / 2.0;
+    }
 
-    // 测试用例
-    solution.addNum(1);
-    solution.addNum(2);
-    System.out.println("测试1: " + solution.findMedian() + " (期望: 1.5)");
+    public static void main(String[] args) {
+        T076_P295_数据流的中位数 solution = new T076_P295_数据流的中位数();
 
-    solution.addNum(3);
-    System.out.println("测试2: " + solution.findMedian() + " (期望: 2.0)");
-  }
+        // 测试用例
+        solution.addNum(1);
+        solution.addNum(2);
+        System.out.println("测试1: " + solution.findMedian() + " (期望: 1.5)");
+
+        solution.addNum(3);
+        System.out.println("测试2: " + solution.findMedian() + " (期望: 2.0)");
+    }
 }

@@ -13,30 +13,30 @@ import java.util.*;
  */
 public class T082_P118_杨辉三角 {
 
-  public static void main(String[] args) {
-    T082_P118_杨辉三角 solution = new T082_P118_杨辉三角();
+    public static void main(String[] args) {
+        T082_P118_杨辉三角 solution = new T082_P118_杨辉三角();
 
-    int numRows = 5;
-    List<List<Integer>> result = solution.generate(numRows);
-    System.out.println("numRows = " + numRows + ", 输出: " + result);
-  }
-
-  // 解题代码
-  public List<List<Integer>> generate(int numRows) {
-    List<List<Integer>> result = new ArrayList<>();
-
-    for (int i = 0; i < numRows; i++) {
-      List<Integer> row = new ArrayList<>();
-      for (int j = 0; j <= i; j++) {
-        if (j == 0 || j == i) {
-          row.add(1);
-        } else {
-          row.add(result.get(i - 1).get(j - 1) + result.get(i - 1).get(j));
-        }
-      }
-      result.add(row);
+        int numRows = 5;
+        List<List<Integer>> result = solution.generate(numRows);
+        System.out.println("numRows = " + numRows + ", 输出: " + result);
     }
 
-    return result;
-  }
+    // 解题代码
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> row = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    row.add(1);
+                } else {
+                    row.add(result.get(i - 1).get(j - 1) + result.get(i - 1).get(j));
+                }
+            }
+            result.add(row);
+        }
+
+        return result;
+    }
 }

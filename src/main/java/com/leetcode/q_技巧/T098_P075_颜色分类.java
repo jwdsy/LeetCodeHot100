@@ -13,32 +13,32 @@ import java.util.*;
  */
 public class T098_P075_颜色分类 {
 
-  public static void main(String[] args) {
-    T098_P075_颜色分类 solution = new T098_P075_颜色分类();
+    public static void main(String[] args) {
+        T098_P075_颜色分类 solution = new T098_P075_颜色分类();
 
-    int[] nums = {2, 0, 2, 1, 1, 0};
-    solution.sortColors(nums);
-    System.out.println("输入: [2,0,2,1,1,0]");
-    System.out.println("输出: " + Arrays.toString(nums));
-  }
-
-  // 解题代码
-  public void sortColors(int[] nums) {
-    int left = 0, right = nums.length - 1, curr = 0;
-
-    while (curr <= right) {
-      if (nums[curr] == 0) {
-        nums[curr] = nums[left];
-        nums[left] = 0;
-        left++;
-        curr++;
-      } else if (nums[curr] == 2) {
-        nums[curr] = nums[right];
-        nums[right] = 2;
-        right--;
-      } else {
-        curr++;
-      }
+        int[] nums = {2, 0, 2, 1, 1, 0};
+        solution.sortColors(nums);
+        System.out.println("输入: [2,0,2,1,1,0]");
+        System.out.println("输出: " + Arrays.toString(nums));
     }
-  }
+
+    // 解题代码
+    public void sortColors(int[] nums) {
+        int left = 0, right = nums.length - 1, curr = 0;
+
+        while (curr <= right) {
+            if (nums[curr] == 0) {
+                nums[curr] = nums[left];
+                nums[left] = 0;
+                left++;
+                curr++;
+            } else if (nums[curr] == 2) {
+                nums[curr] = nums[right];
+                nums[right] = 2;
+                right--;
+            } else {
+                curr++;
+            }
+        }
+    }
 }

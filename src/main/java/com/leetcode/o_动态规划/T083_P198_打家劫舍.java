@@ -14,25 +14,25 @@ import java.util.*;
  */
 public class T083_P198_打家劫舍 {
 
-  public static void main(String[] args) {
-    T083_P198_打家劫舍 solution = new T083_P198_打家劫舍();
+    public static void main(String[] args) {
+        T083_P198_打家劫舍 solution = new T083_P198_打家劫舍();
 
-    int[] nums = {1, 2, 3, 1};
-    int result = solution.rob(nums);
-    System.out.println("输入: [1,2,3,1], 输出: " + result);
-  }
-
-  // 解题代码
-  public int rob(int[] nums) {
-    if (nums == null || nums.length == 0) return 0;
-    if (nums.length == 1) return nums[0];
-
-    int prev2 = 0, prev1 = nums[0];
-    for (int i = 1; i < nums.length; i++) {
-      int curr = Math.max(prev1, prev2 + nums[i]);
-      prev2 = prev1;
-      prev1 = curr;
+        int[] nums = {1, 2, 3, 1};
+        int result = solution.rob(nums);
+        System.out.println("输入: [1,2,3,1], 输出: " + result);
     }
-    return prev1;
-  }
+
+    // 解题代码
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        if (nums.length == 1) return nums[0];
+
+        int prev2 = 0, prev1 = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int curr = Math.max(prev1, prev2 + nums[i]);
+            prev2 = prev1;
+            prev1 = curr;
+        }
+        return prev1;
+    }
 }

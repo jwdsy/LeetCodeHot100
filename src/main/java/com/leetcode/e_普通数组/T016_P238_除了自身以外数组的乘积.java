@@ -14,34 +14,34 @@ import java.util.*;
  */
 public class T016_P238_除了自身以外数组的乘积 {
 
-  public static void main(String[] args) {
-    T016_P238_除了自身以外数组的乘积 solution = new T016_P238_除了自身以外数组的乘积();
+    public static void main(String[] args) {
+        T016_P238_除了自身以外数组的乘积 solution = new T016_P238_除了自身以外数组的乘积();
 
-    // 测试示例: nums = [1,2,3,4]
-    int[] nums = {1, 2, 3, 4};
-    int[] result = solution.productExceptSelf(nums);
-    System.out.println("输入: nums = [1,2,3,4]");
-    System.out.println("输出: " + Arrays.toString(result));
-  }
-
-  // 解题代码
-  public int[] productExceptSelf(int[] nums) {
-    int n = nums.length;
-    int[] answer = new int[n];
-
-    // 计算前缀积
-    answer[0] = 1;
-    for (int i = 1; i < n; i++) {
-      answer[i] = answer[i - 1] * nums[i - 1];
+        // 测试示例: nums = [1,2,3,4]
+        int[] nums = {1, 2, 3, 4};
+        int[] result = solution.productExceptSelf(nums);
+        System.out.println("输入: nums = [1,2,3,4]");
+        System.out.println("输出: " + Arrays.toString(result));
     }
 
-    // 乘上后缀积
-    int suffix = 1;
-    for (int i = n - 1; i >= 0; i--) {
-      answer[i] *= suffix;
-      suffix *= nums[i];
-    }
+    // 解题代码
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] answer = new int[n];
 
-    return answer;
-  }
+        // 计算前缀积
+        answer[0] = 1;
+        for (int i = 1; i < n; i++) {
+            answer[i] = answer[i - 1] * nums[i - 1];
+        }
+
+        // 乘上后缀积
+        int suffix = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            answer[i] *= suffix;
+            suffix *= nums[i];
+        }
+
+        return answer;
+    }
 }

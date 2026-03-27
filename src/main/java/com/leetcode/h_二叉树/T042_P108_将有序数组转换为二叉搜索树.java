@@ -1,6 +1,7 @@
 package com.leetcode.h_二叉树;
 
 import com.leetcode.util.TreeNode;
+
 import java.util.*;
 
 /**
@@ -14,27 +15,27 @@ import java.util.*;
  */
 public class T042_P108_将有序数组转换为二叉搜索树 {
 
-  public static void main(String[] args) {
-    T042_P108_将有序数组转换为二叉搜索树 solution = new T042_P108_将有序数组转换为二叉搜索树();
+    public static void main(String[] args) {
+        T042_P108_将有序数组转换为二叉搜索树 solution = new T042_P108_将有序数组转换为二叉搜索树();
 
-    int[] nums = {-10, -3, 0, 5, 9};
-    TreeNode result = solution.sortedArrayToBST(nums);
-    System.out.println("输出: 已构建");
-  }
+        int[] nums = {-10, -3, 0, 5, 9};
+        TreeNode result = solution.sortedArrayToBST(nums);
+        System.out.println("输出: 已构建");
+    }
 
-  // 解题代码
-  public TreeNode sortedArrayToBST(int[] nums) {
-    return buildBST(nums, 0, nums.length - 1);
-  }
+    // 解题代码
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return buildBST(nums, 0, nums.length - 1);
+    }
 
-  private TreeNode buildBST(int[] nums, int left, int right) {
-    if (left > right) return null;
+    private TreeNode buildBST(int[] nums, int left, int right) {
+        if (left > right) return null;
 
-    int mid = left + (right - left) / 2;
-    TreeNode node = new TreeNode(nums[mid]);
-    node.left = buildBST(nums, left, mid - 1);
-    node.right = buildBST(nums, mid + 1, right);
+        int mid = left + (right - left) / 2;
+        TreeNode node = new TreeNode(nums[mid]);
+        node.left = buildBST(nums, left, mid - 1);
+        node.right = buildBST(nums, mid + 1, right);
 
-    return node;
-  }
+        return node;
+    }
 }

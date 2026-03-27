@@ -12,53 +12,53 @@ package com.leetcode.k_二分查找;
  */
 public class T068_P004_寻找两个正序数组的中位数 {
 
-  public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-    int m = nums1.length, n = nums2.length;
-    int total = m + n;
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int total = m + n;
 
-    // 如果总长度为奇数，找第 (total+1)/2 小的数
-    if (total % 2 == 1) {
-      return findKth(nums1, nums2, (total + 1) / 2);
-    } else {
-      // 如果总长度为偶数，找第 total/2 和 total/2+1 小的数，取平均
-      return (findKth(nums1, nums2, total / 2) + findKth(nums1, nums2, total / 2 + 1)) / 2.0;
+        // 如果总长度为奇数，找第 (total+1)/2 小的数
+        if (total % 2 == 1) {
+            return findKth(nums1, nums2, (total + 1) / 2);
+        } else {
+            // 如果总长度为偶数，找第 total/2 和 total/2+1 小的数，取平均
+            return (findKth(nums1, nums2, total / 2) + findKth(nums1, nums2, total / 2 + 1)) / 2.0;
+        }
     }
-  }
 
-  private double findKth(int[] nums1, int[] nums2, int k) {
-    int m = nums1.length, n = nums2.length;
-    int index1 = 0, index2 = 0;
+    private double findKth(int[] nums1, int[] nums2, int k) {
+        int m = nums1.length, n = nums2.length;
+        int index1 = 0, index2 = 0;
 
-    while (true) {
-      // 边界情况
-      if (index1 == m) return nums2[index2 + k - 1];
-      if (index2 == n) return nums1[index1 + k - 1];
-      if (k == 1) return Math.min(nums1[index1], nums2[index2]);
+        while (true) {
+            // 边界情况
+            if (index1 == m) return nums2[index2 + k - 1];
+            if (index2 == n) return nums1[index1 + k - 1];
+            if (k == 1) return Math.min(nums1[index1], nums2[index2]);
 
-      // 正常情况
-      int newIndex1 = Math.min(index1 + k / 2 - 1, m - 1);
-      int newIndex2 = Math.min(index2 + k / 2 - 1, n - 1);
+            // 正常情况
+            int newIndex1 = Math.min(index1 + k / 2 - 1, m - 1);
+            int newIndex2 = Math.min(index2 + k / 2 - 1, n - 1);
 
-      if (nums1[newIndex1] <= nums2[newIndex2]) {
-        k -= (newIndex1 - index1 + 1);
-        index1 = newIndex1 + 1;
-      } else {
-        k -= (newIndex2 - index2 + 1);
-        index2 = newIndex2 + 1;
-      }
+            if (nums1[newIndex1] <= nums2[newIndex2]) {
+                k -= (newIndex1 - index1 + 1);
+                index1 = newIndex1 + 1;
+            } else {
+                k -= (newIndex2 - index2 + 1);
+                index2 = newIndex2 + 1;
+            }
+        }
     }
-  }
 
-  public static void main(String[] args) {
-    T068_P004_寻找两个正序数组的中位数 solution = new T068_P004_寻找两个正序数组的中位数();
+    public static void main(String[] args) {
+        T068_P004_寻找两个正序数组的中位数 solution = new T068_P004_寻找两个正序数组的中位数();
 
-    // 测试用例
-    int[] nums1 = {1, 3};
-    int[] nums2 = {2};
-    System.out.println("测试1: " + solution.findMedianSortedArrays(nums1, nums2) + " (期望: 2.0)");
+        // 测试用例
+        int[] nums1 = {1, 3};
+        int[] nums2 = {2};
+        System.out.println("测试1: " + solution.findMedianSortedArrays(nums1, nums2) + " (期望: 2.0)");
 
-    int[] nums3 = {1, 2};
-    int[] nums4 = {3, 4};
-    System.out.println("测试2: " + solution.findMedianSortedArrays(nums3, nums4) + " (期望: 2.5)");
-  }
+        int[] nums3 = {1, 2};
+        int[] nums4 = {3, 4};
+        System.out.println("测试2: " + solution.findMedianSortedArrays(nums3, nums4) + " (期望: 2.5)");
+    }
 }

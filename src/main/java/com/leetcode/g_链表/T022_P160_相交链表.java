@@ -1,6 +1,7 @@
 package com.leetcode.g_链表;
 
 import com.leetcode.util.ListNode;
+
 import java.util.*;
 
 /**
@@ -15,40 +16,40 @@ import java.util.*;
  */
 public class T022_P160_相交链表 {
 
-  public static void main(String[] args) {
-    T022_P160_相交链表 solution = new T022_P160_相交链表();
+    public static void main(String[] args) {
+        T022_P160_相交链表 solution = new T022_P160_相交链表();
 
-    // 创建链表 A: 4 -> 1 -> 8 -> 4 -> 5
-    // 创建链表 B: 5 -> 6 -> 1 -> 8 -> 4 -> 5
-    ListNode intersect = new ListNode(8);
-    intersect.next = new ListNode(4);
-    intersect.next.next = new ListNode(5);
+        // 创建链表 A: 4 -> 1 -> 8 -> 4 -> 5
+        // 创建链表 B: 5 -> 6 -> 1 -> 8 -> 4 -> 5
+        ListNode intersect = new ListNode(8);
+        intersect.next = new ListNode(4);
+        intersect.next.next = new ListNode(5);
 
-    ListNode headA = new ListNode(4);
-    headA.next = new ListNode(1);
-    headA.next.next = intersect;
+        ListNode headA = new ListNode(4);
+        headA.next = new ListNode(1);
+        headA.next.next = intersect;
 
-    ListNode headB = new ListNode(5);
-    headB.next = new ListNode(6);
-    headB.next.next = new ListNode(1);
-    headB.next.next.next = intersect;
+        ListNode headB = new ListNode(5);
+        headB.next = new ListNode(6);
+        headB.next.next = new ListNode(1);
+        headB.next.next.next = intersect;
 
-    ListNode result = solution.getIntersectionNode(headA, headB);
-    System.out.println("输出: " + (result != null ? result.val : "null"));
-  }
-
-  // 解题代码
-  public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-    if (headA == null || headB == null) return null;
-
-    ListNode pA = headA;
-    ListNode pB = headB;
-
-    while (pA != pB) {
-      pA = (pA == null) ? headB : pA.next;
-      pB = (pB == null) ? headA : pB.next;
+        ListNode result = solution.getIntersectionNode(headA, headB);
+        System.out.println("输出: " + (result != null ? result.val : "null"));
     }
 
-    return pA;
-  }
+    // 解题代码
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+
+        ListNode pA = headA;
+        ListNode pB = headB;
+
+        while (pA != pB) {
+            pA = (pA == null) ? headB : pA.next;
+            pB = (pB == null) ? headA : pB.next;
+        }
+
+        return pA;
+    }
 }

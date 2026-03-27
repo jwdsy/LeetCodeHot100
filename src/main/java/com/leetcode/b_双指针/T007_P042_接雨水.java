@@ -12,31 +12,31 @@ package com.leetcode.b_双指针;
  */
 public class T007_P042_接雨水 {
 
-  public static void main(String[] args) {
-    T007_P042_接雨水 solution = new T007_P042_接雨水();
+    public static void main(String[] args) {
+        T007_P042_接雨水 solution = new T007_P042_接雨水();
 
-    // 测试示例: height = [0,1,0,2,1,0,1,3,2,1,2,1]
-    int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-    int result = solution.trap(height);
-    System.out.println("输入: height = [0,1,0,2,1,0,1,3,2,1,2,1]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public int trap(int[] height) {
-    int left = 0, right = height.length - 1;
-    int leftMax = 0, rightMax = 0, water = 0;
-    while (left < right) {
-      if (height[left] < height[right]) {
-        if (height[left] >= leftMax) leftMax = height[left];
-        else water += leftMax - height[left];
-        left++;
-      } else {
-        if (height[right] >= rightMax) rightMax = height[right];
-        else water += rightMax - height[right];
-        right--;
-      }
+        // 测试示例: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+        int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+        int result = solution.trap(height);
+        System.out.println("输入: height = [0,1,0,2,1,0,1,3,2,1,2,1]");
+        System.out.println("输出: " + result);
     }
-    return water;
-  }
+
+    // 解题代码
+    public int trap(int[] height) {
+        int left = 0, right = height.length - 1;
+        int leftMax = 0, rightMax = 0, water = 0;
+        while (left < right) {
+            if (height[left] < height[right]) {
+                if (height[left] >= leftMax) leftMax = height[left];
+                else water += leftMax - height[left];
+                left++;
+            } else {
+                if (height[right] >= rightMax) rightMax = height[right];
+                else water += rightMax - height[right];
+                right--;
+            }
+        }
+        return water;
+    }
 }

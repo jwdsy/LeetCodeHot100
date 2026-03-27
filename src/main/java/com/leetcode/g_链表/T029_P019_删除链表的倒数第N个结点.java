@@ -1,6 +1,7 @@
 package com.leetcode.g_链表;
 
 import com.leetcode.util.ListNode;
+
 import java.util.*;
 
 /**
@@ -14,35 +15,35 @@ import java.util.*;
  */
 public class T029_P019_删除链表的倒数第N个结点 {
 
-  public static void main(String[] args) {
-    T029_P019_删除链表的倒数第N个结点 solution = new T029_P019_删除链表的倒数第N个结点();
+    public static void main(String[] args) {
+        T029_P019_删除链表的倒数第N个结点 solution = new T029_P019_删除链表的倒数第N个结点();
 
-    int[] arr = {1, 2, 3, 4, 5};
-    ListNode head = ListNode.createFromArray(arr);
-    int n = 2;
-    ListNode result = solution.removeNthFromEnd(head, n);
-    System.out.println("输入: head = [1,2,3,4,5], n = 2");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public ListNode removeNthFromEnd(ListNode head, int n) {
-    ListNode dummy = new ListNode(0);
-    dummy.next = head;
-
-    ListNode fast = dummy;
-    ListNode slow = dummy;
-
-    for (int i = 0; i <= n; i++) {
-      fast = fast.next;
+        int[] arr = {1, 2, 3, 4, 5};
+        ListNode head = ListNode.createFromArray(arr);
+        int n = 2;
+        ListNode result = solution.removeNthFromEnd(head, n);
+        System.out.println("输入: head = [1,2,3,4,5], n = 2");
+        System.out.println("输出: " + result);
     }
 
-    while (fast != null) {
-      fast = fast.next;
-      slow = slow.next;
-    }
+    // 解题代码
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
 
-    slow.next = slow.next.next;
-    return dummy.next;
-  }
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+
+        for (int i = 0; i <= n; i++) {
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+        return dummy.next;
+    }
 }

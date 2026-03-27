@@ -11,30 +11,30 @@ package com.leetcode.k_二分查找;
  */
 public class T063_P035_搜索插入位置 {
 
-  public int searchInsert(int[] nums, int target) {
-    int left = 0, right = nums.length - 1;
+    public int searchInsert(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
 
-    while (left <= right) {
-      int mid = left + (right - left) / 2;
-      if (nums[mid] == target) {
-        return mid;
-      } else if (nums[mid] < target) {
-        left = mid + 1;
-      } else {
-        right = mid - 1;
-      }
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return left;
     }
 
-    return left;
-  }
+    public static void main(String[] args) {
+        T063_P035_搜索插入位置 solution = new T063_P035_搜索插入位置();
 
-  public static void main(String[] args) {
-    T063_P035_搜索插入位置 solution = new T063_P035_搜索插入位置();
-
-    // 测试用例
-    int[] nums1 = {1, 3, 5, 6};
-    System.out.println("测试1: " + solution.searchInsert(nums1, 5) + " (期望: 2)");
-    System.out.println("测试2: " + solution.searchInsert(nums1, 2) + " (期望: 1)");
-    System.out.println("测试3: " + solution.searchInsert(nums1, 7) + " (期望: 4)");
-  }
+        // 测试用例
+        int[] nums1 = {1, 3, 5, 6};
+        System.out.println("测试1: " + solution.searchInsert(nums1, 5) + " (期望: 2)");
+        System.out.println("测试2: " + solution.searchInsert(nums1, 2) + " (期望: 1)");
+        System.out.println("测试3: " + solution.searchInsert(nums1, 7) + " (期望: 4)");
+    }
 }

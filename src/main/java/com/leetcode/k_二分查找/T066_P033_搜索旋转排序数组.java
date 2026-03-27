@@ -12,45 +12,45 @@ package com.leetcode.k_二分查找;
  */
 public class T066_P033_搜索旋转排序数组 {
 
-  public int search(int[] nums, int target) {
-    if (nums == null || nums.length == 0) return -1;
+    public int search(int[] nums, int target) {
+        if (nums == null || nums.length == 0) return -1;
 
-    int left = 0, right = nums.length - 1;
+        int left = 0, right = nums.length - 1;
 
-    while (left <= right) {
-      int mid = left + (right - left) / 2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
 
-      if (nums[mid] == target) {
-        return mid;
-      }
+            if (nums[mid] == target) {
+                return mid;
+            }
 
-      // 判断左半部分是否有序
-      if (nums[left] <= nums[mid]) {
-        // 左半部分有序
-        if (nums[left] <= target && target < nums[mid]) {
-          right = mid - 1;
-        } else {
-          left = mid + 1;
+            // 判断左半部分是否有序
+            if (nums[left] <= nums[mid]) {
+                // 左半部分有序
+                if (nums[left] <= target && target < nums[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                // 右半部分有序
+                if (nums[mid] < target && target <= nums[right]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
         }
-      } else {
-        // 右半部分有序
-        if (nums[mid] < target && target <= nums[right]) {
-          left = mid + 1;
-        } else {
-          right = mid - 1;
-        }
-      }
+
+        return -1;
     }
 
-    return -1;
-  }
+    public static void main(String[] args) {
+        T066_P033_搜索旋转排序数组 solution = new T066_P033_搜索旋转排序数组();
 
-  public static void main(String[] args) {
-    T066_P033_搜索旋转排序数组 solution = new T066_P033_搜索旋转排序数组();
-
-    // 测试用例
-    int[] nums1 = {4, 5, 6, 7, 0, 1, 2};
-    System.out.println("测试1: " + solution.search(nums1, 0) + " (期望: 4)");
-    System.out.println("测试2: " + solution.search(nums1, 3) + " (期望: -1)");
-  }
+        // 测试用例
+        int[] nums1 = {4, 5, 6, 7, 0, 1, 2};
+        System.out.println("测试1: " + solution.search(nums1, 0) + " (期望: 4)");
+        System.out.println("测试2: " + solution.search(nums1, 3) + " (期望: -1)");
+    }
 }

@@ -1,6 +1,7 @@
 package com.leetcode.g_链表;
 
 import com.leetcode.util.ListNode;
+
 import java.util.*;
 
 /**
@@ -14,35 +15,35 @@ import java.util.*;
  */
 public class T027_P021_合并两个有序链表 {
 
-  public static void main(String[] args) {
-    T027_P021_合并两个有序链表 solution = new T027_P021_合并两个有序链表();
+    public static void main(String[] args) {
+        T027_P021_合并两个有序链表 solution = new T027_P021_合并两个有序链表();
 
-    int[] arr1 = {1, 2, 4};
-    int[] arr2 = {1, 3, 4};
-    ListNode l1 = ListNode.createFromArray(arr1);
-    ListNode l2 = ListNode.createFromArray(arr2);
-    ListNode result = solution.mergeTwoLists(l1, l2);
-    System.out.println("输入: l1 = [1,2,4], l2 = [1,3,4]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    ListNode dummy = new ListNode(0);
-    ListNode curr = dummy;
-
-    while (l1 != null && l2 != null) {
-      if (l1.val <= l2.val) {
-        curr.next = l1;
-        l1 = l1.next;
-      } else {
-        curr.next = l2;
-        l2 = l2.next;
-      }
-      curr = curr.next;
+        int[] arr1 = {1, 2, 4};
+        int[] arr2 = {1, 3, 4};
+        ListNode l1 = ListNode.createFromArray(arr1);
+        ListNode l2 = ListNode.createFromArray(arr2);
+        ListNode result = solution.mergeTwoLists(l1, l2);
+        System.out.println("输入: l1 = [1,2,4], l2 = [1,3,4]");
+        System.out.println("输出: " + result);
     }
 
-    curr.next = (l1 != null) ? l1 : l2;
-    return dummy.next;
-  }
+    // 解题代码
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                curr.next = l1;
+                l1 = l1.next;
+            } else {
+                curr.next = l2;
+                l2 = l2.next;
+            }
+            curr = curr.next;
+        }
+
+        curr.next = (l1 != null) ? l1 : l2;
+        return dummy.next;
+    }
 }

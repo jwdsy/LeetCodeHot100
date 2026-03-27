@@ -14,40 +14,40 @@ import java.util.*;
  */
 public class T058_P039_组合总和 {
 
-  List<List<Integer>> result = new ArrayList<>();
+    List<List<Integer>> result = new ArrayList<>();
 
-  public List<List<Integer>> combinationSum(int[] candidates, int target) {
-    result.clear();
-    Arrays.sort(candidates);
-    backtrack(candidates, target, 0, new ArrayList<>());
-    return result;
-  }
-
-  private void backtrack(int[] candidates, int target, int start, List<Integer> path) {
-    if (target == 0) {
-      result.add(new ArrayList<>(path));
-      return;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result.clear();
+        Arrays.sort(candidates);
+        backtrack(candidates, target, 0, new ArrayList<>());
+        return result;
     }
 
-    for (int i = start; i < candidates.length; i++) {
-      if (candidates[i] > target) break;
+    private void backtrack(int[] candidates, int target, int start, List<Integer> path) {
+        if (target == 0) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
 
-      path.add(candidates[i]);
-      backtrack(candidates, target - candidates[i], i, path);
-      path.remove(path.size() - 1);
+        for (int i = start; i < candidates.length; i++) {
+            if (candidates[i] > target) break;
+
+            path.add(candidates[i]);
+            backtrack(candidates, target - candidates[i], i, path);
+            path.remove(path.size() - 1);
+        }
     }
-  }
 
-  public static void main(String[] args) {
-    T058_P039_组合总和 solution = new T058_P039_组合总和();
+    public static void main(String[] args) {
+        T058_P039_组合总和 solution = new T058_P039_组合总和();
 
-    // 测试用例
-    int[] candidates1 = {2, 3, 6, 7};
-    List<List<Integer>> result1 = solution.combinationSum(candidates1, 7);
-    System.out.println("测试1: " + result1);
+        // 测试用例
+        int[] candidates1 = {2, 3, 6, 7};
+        List<List<Integer>> result1 = solution.combinationSum(candidates1, 7);
+        System.out.println("测试1: " + result1);
 
-    int[] candidates2 = {2, 3, 5};
-    List<List<Integer>> result2 = solution.combinationSum(candidates2, 8);
-    System.out.println("测试2: " + result2);
-  }
+        int[] candidates2 = {2, 3, 5};
+        List<List<Integer>> result2 = solution.combinationSum(candidates2, 8);
+        System.out.println("测试2: " + result2);
+    }
 }

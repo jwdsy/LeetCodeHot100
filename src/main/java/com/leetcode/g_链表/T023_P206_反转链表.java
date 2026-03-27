@@ -1,6 +1,7 @@
 package com.leetcode.g_链表;
 
 import com.leetcode.util.ListNode;
+
 import java.util.*;
 
 /**
@@ -16,29 +17,29 @@ import java.util.*;
  */
 public class T023_P206_反转链表 {
 
-  public static void main(String[] args) {
-    T023_P206_反转链表 solution = new T023_P206_反转链表();
+    public static void main(String[] args) {
+        T023_P206_反转链表 solution = new T023_P206_反转链表();
 
-    // 测试示例: [1,2,3,4,5]
-    int[] arr = {1, 2, 3, 4, 5};
-    ListNode head = ListNode.createFromArray(arr);
-    ListNode result = solution.reverseList(head);
-    System.out.println("输入: " + Arrays.toString(arr));
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public ListNode reverseList(ListNode head) {
-    ListNode prev = null;
-    ListNode curr = head;
-
-    while (curr != null) {
-      ListNode next = curr.next;
-      curr.next = prev;
-      prev = curr;
-      curr = next;
+        // 测试示例: [1,2,3,4,5]
+        int[] arr = {1, 2, 3, 4, 5};
+        ListNode head = ListNode.createFromArray(arr);
+        ListNode result = solution.reverseList(head);
+        System.out.println("输入: " + Arrays.toString(arr));
+        System.out.println("输出: " + result);
     }
 
-    return prev;
-  }
+    // 解题代码
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
 }

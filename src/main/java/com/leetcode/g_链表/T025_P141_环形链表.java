@@ -1,6 +1,7 @@
 package com.leetcode.g_链表;
 
 import com.leetcode.util.ListNode;
+
 import java.util.*;
 
 /**
@@ -15,39 +16,39 @@ import java.util.*;
  */
 public class T025_P141_环形链表 {
 
-  public static void main(String[] args) {
-    T025_P141_环形链表 solution = new T025_P141_环形链表();
+    public static void main(String[] args) {
+        T025_P141_环形链表 solution = new T025_P141_环形链表();
 
-    // 测试示例: 创建有环链表 3->2->0->4->(回到2)
-    ListNode node1 = new ListNode(3);
-    ListNode node2 = new ListNode(2);
-    ListNode node3 = new ListNode(0);
-    ListNode node4 = new ListNode(4);
-    node1.next = node2;
-    node2.next = node3;
-    node3.next = node4;
-    node4.next = node2; // 形成环
+        // 测试示例: 创建有环链表 3->2->0->4->(回到2)
+        ListNode node1 = new ListNode(3);
+        ListNode node2 = new ListNode(2);
+        ListNode node3 = new ListNode(0);
+        ListNode node4 = new ListNode(4);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node2; // 形成环
 
-    boolean result = solution.hasCycle(node1);
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public boolean hasCycle(ListNode head) {
-    if (head == null || head.next == null) return false;
-
-    ListNode slow = head;
-    ListNode fast = head;
-
-    while (fast != null && fast.next != null) {
-      slow = slow.next;
-      fast = fast.next.next;
-
-      if (slow == fast) {
-        return true;
-      }
+        boolean result = solution.hasCycle(node1);
+        System.out.println("输出: " + result);
     }
 
-    return false;
-  }
+    // 解题代码
+    public boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) return false;
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

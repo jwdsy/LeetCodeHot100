@@ -15,41 +15,41 @@ import java.util.*;
  */
 public class T020_P048_旋转图像 {
 
-  public static void main(String[] args) {
-    T020_P048_旋转图像 solution = new T020_P048_旋转图像();
+    public static void main(String[] args) {
+        T020_P048_旋转图像 solution = new T020_P048_旋转图像();
 
-    // 测试示例: matrix = [[1,2,3],[4,5,6],[7,8,9]]
-    int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-    solution.rotate(matrix);
-    System.out.println("输入: matrix = [[1,2,3],[4,5,6],[7,8,9]]");
-    System.out.println("输出: " + Arrays.deepToString(matrix));
-  }
-
-  // 解题代码
-  public void rotate(int[][] matrix) {
-    if (matrix == null || matrix.length <= 1) return;
-
-    int n = matrix.length;
-
-    // 转置矩阵
-    for (int i = 0; i < n; i++) {
-      for (int j = i + 1; j < n; j++) {
-        int temp = matrix[i][j];
-        matrix[i][j] = matrix[j][i];
-        matrix[j][i] = temp;
-      }
+        // 测试示例: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+        int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        solution.rotate(matrix);
+        System.out.println("输入: matrix = [[1,2,3],[4,5,6],[7,8,9]]");
+        System.out.println("输出: " + Arrays.deepToString(matrix));
     }
 
-    // 每行反转
-    for (int i = 0; i < n; i++) {
-      int left = 0, right = n - 1;
-      while (left < right) {
-        int temp = matrix[i][left];
-        matrix[i][left] = matrix[i][right];
-        matrix[i][right] = temp;
-        left++;
-        right--;
-      }
+    // 解题代码
+    public void rotate(int[][] matrix) {
+        if (matrix == null || matrix.length <= 1) return;
+
+        int n = matrix.length;
+
+        // 转置矩阵
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+
+        // 每行反转
+        for (int i = 0; i < n; i++) {
+            int left = 0, right = n - 1;
+            while (left < right) {
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = temp;
+                left++;
+                right--;
+            }
+        }
     }
-  }
 }

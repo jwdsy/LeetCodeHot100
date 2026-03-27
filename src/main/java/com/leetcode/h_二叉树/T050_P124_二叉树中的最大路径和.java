@@ -1,6 +1,7 @@
 package com.leetcode.h_二叉树;
 
 import com.leetcode.util.TreeNode;
+
 import java.util.*;
 
 /**
@@ -14,36 +15,36 @@ import java.util.*;
  */
 public class T050_P124_二叉树中的最大路径和 {
 
-  private int maxSum = Integer.MIN_VALUE;
+    private int maxSum = Integer.MIN_VALUE;
 
-  public static void main(String[] args) {
-    T050_P124_二叉树中的最大路径和 solution = new T050_P124_二叉树中的最大路径和();
+    public static void main(String[] args) {
+        T050_P124_二叉树中的最大路径和 solution = new T050_P124_二叉树中的最大路径和();
 
-    TreeNode root = new TreeNode(-10);
-    root.left = new TreeNode(9);
-    root.right = new TreeNode(20);
-    root.right.left = new TreeNode(15);
-    root.right.right = new TreeNode(7);
+        TreeNode root = new TreeNode(-10);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        root.right.left = new TreeNode(15);
+        root.right.right = new TreeNode(7);
 
-    int result = solution.maxPathSum(root);
-    System.out.println("输出: " + result);
-  }
+        int result = solution.maxPathSum(root);
+        System.out.println("输出: " + result);
+    }
 
-  // 解题代码
-  public int maxPathSum(TreeNode root) {
-    maxSum = Integer.MIN_VALUE;
-    gain(root);
-    return maxSum;
-  }
+    // 解题代码
+    public int maxPathSum(TreeNode root) {
+        maxSum = Integer.MIN_VALUE;
+        gain(root);
+        return maxSum;
+    }
 
-  private int gain(TreeNode node) {
-    if (node == null) return 0;
+    private int gain(TreeNode node) {
+        if (node == null) return 0;
 
-    int left = Math.max(gain(node.left), 0);
-    int right = Math.max(gain(node.right), 0);
+        int left = Math.max(gain(node.left), 0);
+        int right = Math.max(gain(node.right), 0);
 
-    maxSum = Math.max(maxSum, node.val + left + right);
+        maxSum = Math.max(maxSum, node.val + left + right);
 
-    return node.val + Math.max(left, right);
-  }
+        return node.val + Math.max(left, right);
+    }
 }

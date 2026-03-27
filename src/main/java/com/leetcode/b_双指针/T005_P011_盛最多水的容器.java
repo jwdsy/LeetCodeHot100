@@ -11,25 +11,25 @@ package com.leetcode.b_双指针;
  */
 public class T005_P011_盛最多水的容器 {
 
-  public static void main(String[] args) {
-    T005_P011_盛最多水的容器 solution = new T005_P011_盛最多水的容器();
+    public static void main(String[] args) {
+        T005_P011_盛最多水的容器 solution = new T005_P011_盛最多水的容器();
 
-    // 测试示例: height = [1,8,6,2,5,4,8,3,7]
-    int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-    int result = solution.maxArea(height);
-    System.out.println("输入: height = [1,8,6,2,5,4,8,3,7]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public int maxArea(int[] height) {
-    int left = 0, right = height.length - 1, maxArea = 0;
-    while (left < right) {
-      int area = Math.min(height[left], height[right]) * (right - left);
-      maxArea = Math.max(maxArea, area);
-      if (height[left] < height[right]) left++;
-      else right--;
+        // 测试示例: height = [1,8,6,2,5,4,8,3,7]
+        int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+        int result = solution.maxArea(height);
+        System.out.println("输入: height = [1,8,6,2,5,4,8,3,7]");
+        System.out.println("输出: " + result);
     }
-    return maxArea;
-  }
+
+    // 解题代码
+    public int maxArea(int[] height) {
+        int left = 0, right = height.length - 1, maxArea = 0;
+        while (left < right) {
+            int area = Math.min(height[left], height[right]) * (right - left);
+            maxArea = Math.max(maxArea, area);
+            if (height[left] < height[right]) left++;
+            else right--;
+        }
+        return maxArea;
+    }
 }

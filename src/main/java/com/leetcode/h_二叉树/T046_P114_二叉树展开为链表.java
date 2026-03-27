@@ -1,6 +1,7 @@
 package com.leetcode.h_二叉树;
 
 import com.leetcode.util.TreeNode;
+
 import java.util.*;
 
 /**
@@ -14,37 +15,37 @@ import java.util.*;
  */
 public class T046_P114_二叉树展开为链表 {
 
-  public static void main(String[] args) {
-    T046_P114_二叉树展开为链表 solution = new T046_P114_二叉树展开为链表();
+    public static void main(String[] args) {
+        T046_P114_二叉树展开为链表 solution = new T046_P114_二叉树展开为链表();
 
-    TreeNode root = new TreeNode(1);
-    root.left = new TreeNode(2);
-    root.right = new TreeNode(5);
-    root.left.left = new TreeNode(3);
-    root.left.right = new TreeNode(4);
-    root.right.right = new TreeNode(6);
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(5);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(4);
+        root.right.right = new TreeNode(6);
 
-    solution.flatten(root);
-    System.out.println("输出: 已展开");
-  }
-
-  // 解题代码
-  public void flatten(TreeNode root) {
-    if (root == null) return;
-
-    flatten(root.left);
-    flatten(root.right);
-
-    TreeNode left = root.left;
-    TreeNode right = root.right;
-
-    root.left = null;
-    root.right = left;
-
-    TreeNode curr = root;
-    while (curr.right != null) {
-      curr = curr.right;
+        solution.flatten(root);
+        System.out.println("输出: 已展开");
     }
-    curr.right = right;
-  }
+
+    // 解题代码
+    public void flatten(TreeNode root) {
+        if (root == null) return;
+
+        flatten(root.left);
+        flatten(root.right);
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+
+        root.left = null;
+        root.right = left;
+
+        TreeNode curr = root;
+        while (curr.right != null) {
+            curr = curr.right;
+        }
+        curr.right = right;
+    }
 }

@@ -1,6 +1,7 @@
 package com.leetcode.h_二叉树;
 
 import com.leetcode.util.TreeNode;
+
 import java.util.*;
 
 /**
@@ -14,30 +15,30 @@ import java.util.*;
  */
 public class T043_P098_验证二叉搜索树 {
 
-  public static void main(String[] args) {
-    T043_P098_验证二叉搜索树 solution = new T043_P098_验证二叉搜索树();
+    public static void main(String[] args) {
+        T043_P098_验证二叉搜索树 solution = new T043_P098_验证二叉搜索树();
 
-    TreeNode root = new TreeNode(2);
-    root.left = new TreeNode(1);
-    root.right = new TreeNode(3);
+        TreeNode root = new TreeNode(2);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(3);
 
-    boolean result = solution.isValidBST(root);
-    System.out.println("输出: " + result);
-  }
+        boolean result = solution.isValidBST(root);
+        System.out.println("输出: " + result);
+    }
 
-  // 解题代码
-  public boolean isValidBST(TreeNode root) {
-    return inorder(root);
-  }
+    // 解题代码
+    public boolean isValidBST(TreeNode root) {
+        return inorder(root);
+    }
 
-  private long prev = Long.MIN_VALUE;
+    private long prev = Long.MIN_VALUE;
 
-  private boolean inorder(TreeNode node) {
-    if (node == null) return true;
+    private boolean inorder(TreeNode node) {
+        if (node == null) return true;
 
-    if (!inorder(node.left)) return false;
-    if (node.val <= prev) return false;
-    prev = node.val;
-    return inorder(node.right);
-  }
+        if (!inorder(node.left)) return false;
+        if (node.val <= prev) return false;
+        prev = node.val;
+        return inorder(node.right);
+    }
 }

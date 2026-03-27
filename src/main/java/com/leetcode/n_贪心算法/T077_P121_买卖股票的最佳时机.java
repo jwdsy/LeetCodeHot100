@@ -12,31 +12,31 @@ package com.leetcode.n_贪心算法;
  */
 public class T077_P121_买卖股票的最佳时机 {
 
-  public int maxProfit(int[] prices) {
-    if (prices == null || prices.length == 0) return 0;
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length == 0) return 0;
 
-    int minPrice = Integer.MAX_VALUE;
-    int maxProfit = 0;
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
 
-    for (int price : prices) {
-      if (price < minPrice) {
-        minPrice = price;
-      } else if (price - minPrice > maxProfit) {
-        maxProfit = price - minPrice;
-      }
+        for (int price : prices) {
+            if (price < minPrice) {
+                minPrice = price;
+            } else if (price - minPrice > maxProfit) {
+                maxProfit = price - minPrice;
+            }
+        }
+
+        return maxProfit;
     }
 
-    return maxProfit;
-  }
+    public static void main(String[] args) {
+        T077_P121_买卖股票的最佳时机 solution = new T077_P121_买卖股票的最佳时机();
 
-  public static void main(String[] args) {
-    T077_P121_买卖股票的最佳时机 solution = new T077_P121_买卖股票的最佳时机();
+        // 测试用例
+        int[] prices1 = {7, 1, 5, 3, 6, 4};
+        System.out.println("测试1: " + solution.maxProfit(prices1) + " (期望: 5)");
 
-    // 测试用例
-    int[] prices1 = {7, 1, 5, 3, 6, 4};
-    System.out.println("测试1: " + solution.maxProfit(prices1) + " (期望: 5)");
-
-    int[] prices2 = {7, 6, 4, 3, 1};
-    System.out.println("测试2: " + solution.maxProfit(prices2) + " (期望: 0)");
-  }
+        int[] prices2 = {7, 6, 4, 3, 1};
+        System.out.println("测试2: " + solution.maxProfit(prices2) + " (期望: 0)");
+    }
 }

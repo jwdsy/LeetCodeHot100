@@ -13,35 +13,35 @@ import java.util.*;
  */
 public class T056_P078_子集 {
 
-  List<List<Integer>> result = new ArrayList<>();
+    List<List<Integer>> result = new ArrayList<>();
 
-  public List<List<Integer>> subsets(int[] nums) {
-    result.clear();
-    List<Integer> path = new ArrayList<>();
-    backtrack(nums, 0, path);
-    return result;
-  }
-
-  private void backtrack(int[] nums, int start, List<Integer> path) {
-    result.add(new ArrayList<>(path));
-
-    for (int i = start; i < nums.length; i++) {
-      path.add(nums[i]);
-      backtrack(nums, i + 1, path);
-      path.remove(path.size() - 1);
+    public List<List<Integer>> subsets(int[] nums) {
+        result.clear();
+        List<Integer> path = new ArrayList<>();
+        backtrack(nums, 0, path);
+        return result;
     }
-  }
 
-  public static void main(String[] args) {
-    T056_P078_子集 solution = new T056_P078_子集();
+    private void backtrack(int[] nums, int start, List<Integer> path) {
+        result.add(new ArrayList<>(path));
 
-    // 测试用例
-    int[] nums1 = {1, 2, 3};
-    List<List<Integer>> result1 = solution.subsets(nums1);
-    System.out.println("测试1: " + result1.size() + " 个子集 (期望: 8)");
+        for (int i = start; i < nums.length; i++) {
+            path.add(nums[i]);
+            backtrack(nums, i + 1, path);
+            path.remove(path.size() - 1);
+        }
+    }
 
-    int[] nums2 = {0};
-    List<List<Integer>> result2 = solution.subsets(nums2);
-    System.out.println("测试2: " + result2.size() + " 个子集 (期望: 2)");
-  }
+    public static void main(String[] args) {
+        T056_P078_子集 solution = new T056_P078_子集();
+
+        // 测试用例
+        int[] nums1 = {1, 2, 3};
+        List<List<Integer>> result1 = solution.subsets(nums1);
+        System.out.println("测试1: " + result1.size() + " 个子集 (期望: 8)");
+
+        int[] nums2 = {0};
+        List<List<Integer>> result2 = solution.subsets(nums2);
+        System.out.println("测试2: " + result2.size() + " 个子集 (期望: 2)");
+    }
 }

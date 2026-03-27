@@ -14,34 +14,34 @@ package com.leetcode.k_二分查找;
  */
 public class T067_P153_寻找旋转排序数组中的最小值 {
 
-  public int findMin(int[] nums) {
-    if (nums == null || nums.length == 0) return -1;
+    public int findMin(int[] nums) {
+        if (nums == null || nums.length == 0) return -1;
 
-    int left = 0, right = nums.length - 1;
+        int left = 0, right = nums.length - 1;
 
-    while (left < right) {
-      int mid = left + (right - left) / 2;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
 
-      if (nums[mid] > nums[right]) {
-        // 最小值在右半部分
-        left = mid + 1;
-      } else {
-        // 最小值在左半部分（含mid）
-        right = mid;
-      }
+            if (nums[mid] > nums[right]) {
+                // 最小值在右半部分
+                left = mid + 1;
+            } else {
+                // 最小值在左半部分（含mid）
+                right = mid;
+            }
+        }
+
+        return nums[left];
     }
 
-    return nums[left];
-  }
+    public static void main(String[] args) {
+        T067_P153_寻找旋转排序数组中的最小值 solution = new T067_P153_寻找旋转排序数组中的最小值();
 
-  public static void main(String[] args) {
-    T067_P153_寻找旋转排序数组中的最小值 solution = new T067_P153_寻找旋转排序数组中的最小值();
+        // 测试用例
+        int[] nums1 = {3, 4, 5, 1, 2};
+        System.out.println("测试1: " + solution.findMin(nums1) + " (期望: 1)");
 
-    // 测试用例
-    int[] nums1 = {3, 4, 5, 1, 2};
-    System.out.println("测试1: " + solution.findMin(nums1) + " (期望: 1)");
-
-    int[] nums2 = {4, 5, 6, 7, 0, 1, 2};
-    System.out.println("测试2: " + solution.findMin(nums2) + " (期望: 0)");
-  }
+        int[] nums2 = {4, 5, 6, 7, 0, 1, 2};
+        System.out.println("测试2: " + solution.findMin(nums2) + " (期望: 0)");
+    }
 }

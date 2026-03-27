@@ -13,46 +13,46 @@ import java.util.*;
  */
 public class T061_P131_分割回文串 {
 
-  List<List<String>> result = new ArrayList<>();
+    List<List<String>> result = new ArrayList<>();
 
-  public List<List<String>> partition(String s) {
-    result.clear();
-    backtrack(s, 0, new ArrayList<>());
-    return result;
-  }
-
-  private void backtrack(String s, int start, List<String> path) {
-    if (start == s.length()) {
-      result.add(new ArrayList<>(path));
-      return;
+    public List<List<String>> partition(String s) {
+        result.clear();
+        backtrack(s, 0, new ArrayList<>());
+        return result;
     }
 
-    for (int end = start; end < s.length(); end++) {
-      if (isPalindrome(s, start, end)) {
-        path.add(s.substring(start, end + 1));
-        backtrack(s, end + 1, path);
-        path.remove(path.size() - 1);
-      }
+    private void backtrack(String s, int start, List<String> path) {
+        if (start == s.length()) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int end = start; end < s.length(); end++) {
+            if (isPalindrome(s, start, end)) {
+                path.add(s.substring(start, end + 1));
+                backtrack(s, end + 1, path);
+                path.remove(path.size() - 1);
+            }
+        }
     }
-  }
 
-  private boolean isPalindrome(String s, int left, int right) {
-    while (left < right) {
-      if (s.charAt(left) != s.charAt(right)) return false;
-      left++;
-      right--;
+    private boolean isPalindrome(String s, int left, int right) {
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) return false;
+            left++;
+            right--;
+        }
+        return true;
     }
-    return true;
-  }
 
-  public static void main(String[] args) {
-    T061_P131_分割回文串 solution = new T061_P131_分割回文串();
+    public static void main(String[] args) {
+        T061_P131_分割回文串 solution = new T061_P131_分割回文串();
 
-    // 测试用例
-    List<List<String>> result1 = solution.partition("aab");
-    System.out.println("测试1: " + result1.size() + " 种分割 (期望: 2)");
+        // 测试用例
+        List<List<String>> result1 = solution.partition("aab");
+        System.out.println("测试1: " + result1.size() + " 种分割 (期望: 2)");
 
-    List<List<String>> result2 = solution.partition("a");
-    System.out.println("测试2: " + result2 + " (期望: [[a]])");
-  }
+        List<List<String>> result2 = solution.partition("a");
+        System.out.println("测试2: " + result2 + " (期望: [[a]])");
+    }
 }

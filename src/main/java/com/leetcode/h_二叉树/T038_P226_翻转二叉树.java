@@ -1,6 +1,7 @@
 package com.leetcode.h_二叉树;
 
 import com.leetcode.util.TreeNode;
+
 import java.util.*;
 
 /**
@@ -14,32 +15,32 @@ import java.util.*;
  */
 public class T038_P226_翻转二叉树 {
 
-  public static void main(String[] args) {
-    T038_P226_翻转二叉树 solution = new T038_P226_翻转二叉树();
+    public static void main(String[] args) {
+        T038_P226_翻转二叉树 solution = new T038_P226_翻转二叉树();
 
-    TreeNode root = new TreeNode(4);
-    root.left = new TreeNode(2);
-    root.right = new TreeNode(7);
-    root.left.left = new TreeNode(1);
-    root.left.right = new TreeNode(3);
-    root.right.left = new TreeNode(6);
-    root.right.right = new TreeNode(9);
+        TreeNode root = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(7);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(9);
 
-    TreeNode result = solution.invertTree(root);
-    System.out.println("输出: 已翻转");
-  }
+        TreeNode result = solution.invertTree(root);
+        System.out.println("输出: 已翻转");
+    }
 
-  // 解题代码
-  public TreeNode invertTree(TreeNode root) {
-    if (root == null) return null;
+    // 解题代码
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
 
-    TreeNode temp = root.left;
-    root.left = root.right;
-    root.right = temp;
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
 
-    invertTree(root.left);
-    invertTree(root.right);
+        invertTree(root.left);
+        invertTree(root.right);
 
-    return root;
-  }
+        return root;
+    }
 }

@@ -13,42 +13,42 @@ import java.util.*;
  */
 public class T099_P031_下一个排列 {
 
-  public static void main(String[] args) {
-    T099_P031_下一个排列 solution = new T099_P031_下一个排列();
+    public static void main(String[] args) {
+        T099_P031_下一个排列 solution = new T099_P031_下一个排列();
 
-    int[] nums = {1, 2, 3};
-    solution.nextPermutation(nums);
-    System.out.println("输入: [1,2,3]");
-    System.out.println("输出: " + Arrays.toString(nums));
-  }
-
-  // 解题代码
-  public void nextPermutation(int[] nums) {
-    int i = nums.length - 2;
-    while (i >= 0 && nums[i] >= nums[i + 1]) {
-      i--;
+        int[] nums = {1, 2, 3};
+        solution.nextPermutation(nums);
+        System.out.println("输入: [1,2,3]");
+        System.out.println("输出: " + Arrays.toString(nums));
     }
 
-    if (i >= 0) {
-      int j = nums.length - 1;
-      while (j >= 0 && nums[j] <= nums[i]) {
-        j--;
-      }
-      int temp = nums[i];
-      nums[i] = nums[j];
-      nums[j] = temp;
+    // 解题代码
+    public void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+
+        if (i >= 0) {
+            int j = nums.length - 1;
+            while (j >= 0 && nums[j] <= nums[i]) {
+                j--;
+            }
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+
+        reverse(nums, i + 1, nums.length - 1);
     }
 
-    reverse(nums, i + 1, nums.length - 1);
-  }
-
-  private void reverse(int[] nums, int left, int right) {
-    while (left < right) {
-      int temp = nums[left];
-      nums[left] = nums[right];
-      nums[right] = temp;
-      left++;
-      right--;
+    private void reverse(int[] nums, int left, int right) {
+        while (left < right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
     }
-  }
 }

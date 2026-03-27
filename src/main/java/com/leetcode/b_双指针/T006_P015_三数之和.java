@@ -14,36 +14,36 @@ import java.util.*;
  */
 public class T006_P015_三数之和 {
 
-  public static void main(String[] args) {
-    T006_P015_三数之和 solution = new T006_P015_三数之和();
+    public static void main(String[] args) {
+        T006_P015_三数之和 solution = new T006_P015_三数之和();
 
-    // 测试示例: nums = [-1,0,1,2,-1,-4]
-    int[] nums = {-1, 0, 1, 2, -1, -4};
-    List<List<Integer>> result = solution.threeSum(nums);
-    System.out.println("输入: nums = [-1,0,1,2,-1,-4]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public List<List<Integer>> threeSum(int[] nums) {
-    List<List<Integer>> res = new java.util.ArrayList<>();
-    java.util.Arrays.sort(nums);
-    for (int i = 0; i < nums.length - 2; i++) {
-      if (nums[i] > 0) break;
-      if (i > 0 && nums[i] == nums[i - 1]) continue;
-      int left = i + 1, right = nums.length - 1;
-      while (left < right) {
-        int sum = nums[i] + nums[left] + nums[right];
-        if (sum == 0) {
-          res.add(java.util.Arrays.asList(nums[i], nums[left], nums[right]));
-          while (left < right && nums[left] == nums[left + 1]) left++;
-          while (left < right && nums[right] == nums[right - 1]) right--;
-          left++;
-          right--;
-        } else if (sum < 0) left++;
-        else right--;
-      }
+        // 测试示例: nums = [-1,0,1,2,-1,-4]
+        int[] nums = {-1, 0, 1, 2, -1, -4};
+        List<List<Integer>> result = solution.threeSum(nums);
+        System.out.println("输入: nums = [-1,0,1,2,-1,-4]");
+        System.out.println("输出: " + result);
     }
-    return res;
-  }
+
+    // 解题代码
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res = new java.util.ArrayList<>();
+        java.util.Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (nums[i] > 0) break;
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int left = i + 1, right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum == 0) {
+                    res.add(java.util.Arrays.asList(nums[i], nums[left], nums[right]));
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+                    left++;
+                    right--;
+                } else if (sum < 0) left++;
+                else right--;
+            }
+        }
+        return res;
+    }
 }

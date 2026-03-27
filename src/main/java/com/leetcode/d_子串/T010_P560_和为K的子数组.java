@@ -14,31 +14,31 @@ import java.util.*;
  */
 public class T010_P560_和为K的子数组 {
 
-  public static void main(String[] args) {
-    T010_P560_和为K的子数组 solution = new T010_P560_和为K的子数组();
+    public static void main(String[] args) {
+        T010_P560_和为K的子数组 solution = new T010_P560_和为K的子数组();
 
-    // 测试示例: nums = [1,1,1], k = 2
-    int[] nums = {1, 1, 1};
-    int k = 2;
-    int result = solution.subarraySum(nums, k);
-    System.out.println("输入: nums = [1,1,1], k = 2");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public int subarraySum(int[] nums, int k) {
-    Map<Integer, Integer> prefixCount = new HashMap<>();
-    prefixCount.put(0, 1);
-
-    int prefix = 0;
-    int count = 0;
-
-    for (int num : nums) {
-      prefix += num;
-      count += prefixCount.getOrDefault(prefix - k, 0);
-      prefixCount.put(prefix, prefixCount.getOrDefault(prefix, 0) + 1);
+        // 测试示例: nums = [1,1,1], k = 2
+        int[] nums = {1, 1, 1};
+        int k = 2;
+        int result = solution.subarraySum(nums, k);
+        System.out.println("输入: nums = [1,1,1], k = 2");
+        System.out.println("输出: " + result);
     }
 
-    return count;
-  }
+    // 解题代码
+    public int subarraySum(int[] nums, int k) {
+        Map<Integer, Integer> prefixCount = new HashMap<>();
+        prefixCount.put(0, 1);
+
+        int prefix = 0;
+        int count = 0;
+
+        for (int num : nums) {
+            prefix += num;
+            count += prefixCount.getOrDefault(prefix - k, 0);
+            prefixCount.put(prefix, prefixCount.getOrDefault(prefix, 0) + 1);
+        }
+
+        return count;
+    }
 }

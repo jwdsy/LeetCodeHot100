@@ -15,27 +15,27 @@ import java.util.*;
  */
 public class T001_P001_两数之和 {
 
-  public static void main(String[] args) {
-    T001_P001_两数之和 solution = new T001_P001_两数之和();
+    public static void main(String[] args) {
+        T001_P001_两数之和 solution = new T001_P001_两数之和();
 
-    // 测试示例: nums = [2,7,11,15], target = 9
-    int[] nums = {2, 7, 11, 15};
-    int target = 9;
-    int[] result = solution.twoSum(nums, target);
-    System.out.println("输入: nums = [2,7,11,15], target = 9");
-    System.out.println("输出: " + java.util.Arrays.toString(result));
-  }
-
-  // 解题代码
-  public int[] twoSum(int[] nums, int target) {
-    java.util.Map<Integer, Integer> map = new java.util.HashMap<>();
-    for (int i = 0; i < nums.length; i++) {
-      int complement = target - nums[i];
-      if (map.containsKey(complement)) {
-        return new int[] {map.get(complement), i};
-      }
-      map.put(nums[i], i);
+        // 测试示例: nums = [2,7,11,15], target = 9
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+        int[] result = solution.twoSum(nums, target);
+        System.out.println("输入: nums = [2,7,11,15], target = 9");
+        System.out.println("输出: " + java.util.Arrays.toString(result));
     }
-    throw new IllegalArgumentException("No two sum solution");
-  }
+
+    // 解题代码
+    public int[] twoSum(int[] nums, int target) {
+        java.util.Map<Integer, Integer> map = new java.util.HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
 }

@@ -13,36 +13,36 @@ import java.util.*;
  */
 public class T080_P763_划分字母区间 {
 
-  public List<Integer> partitionLabels(String s) {
-    List<Integer> result = new ArrayList<>();
-    if (s == null || s.length() == 0) return result;
+    public List<Integer> partitionLabels(String s) {
+        List<Integer> result = new ArrayList<>();
+        if (s == null || s.length() == 0) return result;
 
-    // 记录每个字符最后出现的位置
-    int[] lastIndex = new int[26];
-    for (int i = 0; i < s.length(); i++) {
-      lastIndex[s.charAt(i) - 'a'] = i;
+        // 记录每个字符最后出现的位置
+        int[] lastIndex = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            lastIndex[s.charAt(i) - 'a'] = i;
+        }
+
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            end = Math.max(end, lastIndex[s.charAt(i) - 'a']);
+
+            // 到达当前片段的右边界
+            if (i == end) {
+                result.add(end - start + 1);
+                start = end + 1;
+            }
+        }
+
+        return result;
     }
 
-    int start = 0, end = 0;
-    for (int i = 0; i < s.length(); i++) {
-      end = Math.max(end, lastIndex[s.charAt(i) - 'a']);
+    public static void main(String[] args) {
+        T080_P763_划分字母区间 solution = new T080_P763_划分字母区间();
 
-      // 到达当前片段的右边界
-      if (i == end) {
-        result.add(end - start + 1);
-        start = end + 1;
-      }
+        // 测试用例
+        System.out.println(
+                "测试1: " + solution.partitionLabels("ababcbacadefegdehijhklij") + " (期望: [9,7,8])");
+        System.out.println("测试2: " + solution.partitionLabels("eccbbbbdec") + " (期望: [10])");
     }
-
-    return result;
-  }
-
-  public static void main(String[] args) {
-    T080_P763_划分字母区间 solution = new T080_P763_划分字母区间();
-
-    // 测试用例
-    System.out.println(
-        "测试1: " + solution.partitionLabels("ababcbacadefegdehijhklij") + " (期望: [9,7,8])");
-    System.out.println("测试2: " + solution.partitionLabels("eccbbbbdec") + " (期望: [10])");
-  }
 }

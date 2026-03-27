@@ -13,21 +13,21 @@ import java.util.*;
  */
 public class T096_P136_只出现一次的数字 {
 
-  public static void main(String[] args) {
-    T096_P136_只出现一次的数字 solution = new T096_P136_只出现一次的数字();
+    public static void main(String[] args) {
+        T096_P136_只出现一次的数字 solution = new T096_P136_只出现一次的数字();
 
-    int[] nums = {4, 1, 2, 1, 2};
-    int result = solution.singleNumber(nums);
-    System.out.println("输入: [4,1,2,1,2]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public int singleNumber(int[] nums) {
-    int result = 0;
-    for (int num : nums) {
-      result ^= num;
+        int[] nums = {4, 1, 2, 1, 2};
+        int result = solution.singleNumber(nums);
+        System.out.println("输入: [4,1,2,1,2]");
+        System.out.println("输出: " + result);
     }
-    return result;
-  }
+
+    // 解题代码
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        for (int num : nums) {
+            result ^= num;
+        }
+        return result;
+    }
 }

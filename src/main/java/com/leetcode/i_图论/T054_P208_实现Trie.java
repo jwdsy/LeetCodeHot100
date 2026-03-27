@@ -14,64 +14,64 @@ package com.leetcode.i_图论;
  */
 public class T054_P208_实现Trie {
 
-  private class TrieNode {
-    TrieNode[] children;
-    boolean isEnd;
+    private class TrieNode {
+        TrieNode[] children;
+        boolean isEnd;
 
-    TrieNode() {
-      children = new TrieNode[26];
-      isEnd = false;
+        TrieNode() {
+            children = new TrieNode[26];
+            isEnd = false;
+        }
     }
-  }
 
-  private TrieNode root;
+    private TrieNode root;
 
-  public T054_P208_实现Trie() {
-    root = new TrieNode();
-  }
-
-  public void insert(String word) {
-    TrieNode node = root;
-    for (char c : word.toCharArray()) {
-      int index = c - 'a';
-      if (node.children[index] == null) {
-        node.children[index] = new TrieNode();
-      }
-      node = node.children[index];
+    public T054_P208_实现Trie() {
+        root = new TrieNode();
     }
-    node.isEnd = true;
-  }
 
-  public boolean search(String word) {
-    TrieNode node = searchPrefix(word);
-    return node != null && node.isEnd;
-  }
-
-  public boolean startsWith(String prefix) {
-    return searchPrefix(prefix) != null;
-  }
-
-  private TrieNode searchPrefix(String prefix) {
-    TrieNode node = root;
-    for (char c : prefix.toCharArray()) {
-      int index = c - 'a';
-      if (node.children[index] == null) {
-        return null;
-      }
-      node = node.children[index];
+    public void insert(String word) {
+        TrieNode node = root;
+        for (char c : word.toCharArray()) {
+            int index = c - 'a';
+            if (node.children[index] == null) {
+                node.children[index] = new TrieNode();
+            }
+            node = node.children[index];
+        }
+        node.isEnd = true;
     }
-    return node;
-  }
 
-  public static void main(String[] args) {
-    T054_P208_实现Trie trie = new T054_P208_实现Trie();
+    public boolean search(String word) {
+        TrieNode node = searchPrefix(word);
+        return node != null && node.isEnd;
+    }
 
-    // 测试用例
-    trie.insert("apple");
-    System.out.println("search 'apple': " + trie.search("apple") + " (期望: true)");
-    System.out.println("search 'app': " + trie.search("app") + " (期望: false)");
-    System.out.println("startsWith 'app': " + trie.startsWith("app") + " (期望: true)");
-    trie.insert("app");
-    System.out.println("search 'app' after insert: " + trie.search("app") + " (期望: true)");
-  }
+    public boolean startsWith(String prefix) {
+        return searchPrefix(prefix) != null;
+    }
+
+    private TrieNode searchPrefix(String prefix) {
+        TrieNode node = root;
+        for (char c : prefix.toCharArray()) {
+            int index = c - 'a';
+            if (node.children[index] == null) {
+                return null;
+            }
+            node = node.children[index];
+        }
+        return node;
+    }
+
+    public static void main(String[] args) {
+        T054_P208_实现Trie trie = new T054_P208_实现Trie();
+
+        // 测试用例
+        trie.insert("apple");
+        System.out.println("search 'apple': " + trie.search("apple") + " (期望: true)");
+        System.out.println("search 'app': " + trie.search("app") + " (期望: false)");
+        System.out.println("startsWith 'app': " + trie.startsWith("app") + " (期望: true)");
+        trie.insert("app");
+        System.out.println("search 'app' after insert: " + trie.search("app") + " (期望: true)");
+    }
 }

@@ -12,35 +12,35 @@ package com.leetcode.k_二分查找;
  */
 public class T064_P074_搜索二维矩阵 {
 
-  public boolean searchMatrix(int[][] matrix, int target) {
-    if (matrix == null || matrix.length == 0) return false;
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0) return false;
 
-    int m = matrix.length, n = matrix[0].length;
-    int left = 0, right = m * n - 1;
+        int m = matrix.length, n = matrix[0].length;
+        int left = 0, right = m * n - 1;
 
-    while (left <= right) {
-      int mid = left + (right - left) / 2;
-      int row = mid / n;
-      int col = mid % n;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int row = mid / n;
+            int col = mid % n;
 
-      if (matrix[row][col] == target) {
-        return true;
-      } else if (matrix[row][col] < target) {
-        left = mid + 1;
-      } else {
-        right = mid - 1;
-      }
+            if (matrix[row][col] == target) {
+                return true;
+            } else if (matrix[row][col] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return false;
     }
 
-    return false;
-  }
+    public static void main(String[] args) {
+        T064_P074_搜索二维矩阵 solution = new T064_P074_搜索二维矩阵();
 
-  public static void main(String[] args) {
-    T064_P074_搜索二维矩阵 solution = new T064_P074_搜索二维矩阵();
-
-    // 测试用例
-    int[][] matrix1 = {{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}};
-    System.out.println("测试1: " + solution.searchMatrix(matrix1, 3) + " (期望: true)");
-    System.out.println("测试2: " + solution.searchMatrix(matrix1, 13) + " (期望: false)");
-  }
+        // 测试用例
+        int[][] matrix1 = {{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}};
+        System.out.println("测试1: " + solution.searchMatrix(matrix1, 3) + " (期望: true)");
+        System.out.println("测试2: " + solution.searchMatrix(matrix1, 13) + " (期望: false)");
+    }
 }

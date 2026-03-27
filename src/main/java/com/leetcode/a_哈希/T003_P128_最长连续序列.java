@@ -13,32 +13,32 @@ import java.util.*;
  */
 public class T003_P128_最长连续序列 {
 
-  public static void main(String[] args) {
-    T003_P128_最长连续序列 solution = new T003_P128_最长连续序列();
+    public static void main(String[] args) {
+        T003_P128_最长连续序列 solution = new T003_P128_最长连续序列();
 
-    // 测试示例: nums = [100,4,200,1,3,2]
-    int[] nums = {100, 4, 200, 1, 3, 2};
-    int result = solution.longestConsecutive(nums);
-    System.out.println("输入: nums = [100,4,200,1,3,2]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public int longestConsecutive(int[] nums) {
-    if (nums == null || nums.length == 0) return 0;
-    java.util.Set<Integer> numSet = new java.util.HashSet<>();
-    for (int num : nums) numSet.add(num);
-    int longestStreak = 0;
-    for (int num : numSet) {
-      if (!numSet.contains(num - 1)) {
-        int currentNum = num, currentStreak = 1;
-        while (numSet.contains(currentNum + 1)) {
-          currentNum++;
-          currentStreak++;
-        }
-        longestStreak = Math.max(longestStreak, currentStreak);
-      }
+        // 测试示例: nums = [100,4,200,1,3,2]
+        int[] nums = {100, 4, 200, 1, 3, 2};
+        int result = solution.longestConsecutive(nums);
+        System.out.println("输入: nums = [100,4,200,1,3,2]");
+        System.out.println("输出: " + result);
     }
-    return longestStreak;
-  }
+
+    // 解题代码
+    public int longestConsecutive(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        java.util.Set<Integer> numSet = new java.util.HashSet<>();
+        for (int num : nums) numSet.add(num);
+        int longestStreak = 0;
+        for (int num : numSet) {
+            if (!numSet.contains(num - 1)) {
+                int currentNum = num, currentStreak = 1;
+                while (numSet.contains(currentNum + 1)) {
+                    currentNum++;
+                    currentStreak++;
+                }
+                longestStreak = Math.max(longestStreak, currentStreak);
+            }
+        }
+        return longestStreak;
+    }
 }

@@ -14,44 +14,44 @@ import java.util.*;
  */
 public class T011_P239_滑动窗口最大值 {
 
-  public static void main(String[] args) {
-    T011_P239_滑动窗口最大值 solution = new T011_P239_滑动窗口最大值();
+    public static void main(String[] args) {
+        T011_P239_滑动窗口最大值 solution = new T011_P239_滑动窗口最大值();
 
-    // 测试示例: nums = [1,3,-1,-3,5,3,6,7], k = 3
-    int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
-    int k = 3;
-    int[] result = solution.maxSlidingWindow(nums, k);
-    System.out.println("输入: nums = [1,3,-1,-3,5,3,6,7], k = 3");
-    System.out.println("输出: " + Arrays.toString(result));
-  }
-
-  // 解题代码
-  public int[] maxSlidingWindow(int[] nums, int k) {
-    if (nums == null || nums.length == 0) return new int[0];
-
-    int n = nums.length;
-    int[] result = new int[n - k + 1];
-    Deque<Integer> deque = new LinkedList<>();
-
-    for (int i = 0; i < n; i++) {
-      // 移除不在窗口内的元素
-      while (!deque.isEmpty() && deque.peek() < i - k + 1) {
-        deque.poll();
-      }
-
-      // 保持队列递减，移除比当前元素小的
-      while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
-        deque.pollLast();
-      }
-
-      deque.offer(i);
-
-      // 记录窗口最大值
-      if (i >= k - 1) {
-        result[i - k + 1] = nums[deque.peek()];
-      }
+        // 测试示例: nums = [1,3,-1,-3,5,3,6,7], k = 3
+        int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
+        int k = 3;
+        int[] result = solution.maxSlidingWindow(nums, k);
+        System.out.println("输入: nums = [1,3,-1,-3,5,3,6,7], k = 3");
+        System.out.println("输出: " + Arrays.toString(result));
     }
 
-    return result;
-  }
+    // 解题代码
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0) return new int[0];
+
+        int n = nums.length;
+        int[] result = new int[n - k + 1];
+        Deque<Integer> deque = new LinkedList<>();
+
+        for (int i = 0; i < n; i++) {
+            // 移除不在窗口内的元素
+            while (!deque.isEmpty() && deque.peek() < i - k + 1) {
+                deque.poll();
+            }
+
+            // 保持队列递减，移除比当前元素小的
+            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
+                deque.pollLast();
+            }
+
+            deque.offer(i);
+
+            // 记录窗口最大值
+            if (i >= k - 1) {
+                result[i - k + 1] = nums[deque.peek()];
+            }
+        }
+
+        return result;
+    }
 }

@@ -1,6 +1,7 @@
 package com.leetcode.g_链表;
 
 import com.leetcode.util.ListNode;
+
 import java.util.*;
 
 /**
@@ -14,51 +15,51 @@ import java.util.*;
  */
 public class T031_P025_K个一组翻转链表 {
 
-  public static void main(String[] args) {
-    T031_P025_K个一组翻转链表 solution = new T031_P025_K个一组翻转链表();
+    public static void main(String[] args) {
+        T031_P025_K个一组翻转链表 solution = new T031_P025_K个一组翻转链表();
 
-    int[] arr = {1, 2, 3, 4, 5};
-    ListNode head = ListNode.createFromArray(arr);
-    int k = 2;
-    ListNode result = solution.reverseKGroup(head, k);
-    System.out.println("输入: head = [1,2,3,4,5], k = 2");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public ListNode reverseKGroup(ListNode head, int k) {
-    ListNode dummy = new ListNode(0);
-    dummy.next = head;
-    ListNode pre = dummy;
-
-    while (head != null) {
-      ListNode tail = pre;
-      for (int i = 0; i < k; i++) {
-        tail = tail.next;
-        if (tail == null) return dummy.next;
-      }
-      ListNode next = tail.next;
-      ListNode[] newHead = reverse(head, tail);
-      head = newHead[0];
-      tail = newHead[1];
-      pre.next = head;
-      tail.next = next;
-      pre = tail;
-      head = next;
+        int[] arr = {1, 2, 3, 4, 5};
+        ListNode head = ListNode.createFromArray(arr);
+        int k = 2;
+        ListNode result = solution.reverseKGroup(head, k);
+        System.out.println("输入: head = [1,2,3,4,5], k = 2");
+        System.out.println("输出: " + result);
     }
 
-    return dummy.next;
-  }
+    // 解题代码
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
 
-  private ListNode[] reverse(ListNode head, ListNode tail) {
-    ListNode prev = tail.next;
-    ListNode curr = head;
-    while (prev != tail) {
-      ListNode next = curr.next;
-      curr.next = prev;
-      prev = curr;
-      curr = next;
+        while (head != null) {
+            ListNode tail = pre;
+            for (int i = 0; i < k; i++) {
+                tail = tail.next;
+                if (tail == null) return dummy.next;
+            }
+            ListNode next = tail.next;
+            ListNode[] newHead = reverse(head, tail);
+            head = newHead[0];
+            tail = newHead[1];
+            pre.next = head;
+            tail.next = next;
+            pre = tail;
+            head = next;
+        }
+
+        return dummy.next;
     }
-    return new ListNode[] {tail, head};
-  }
+
+    private ListNode[] reverse(ListNode head, ListNode tail) {
+        ListNode prev = tail.next;
+        ListNode curr = head;
+        while (prev != tail) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return new ListNode[]{tail, head};
+    }
 }

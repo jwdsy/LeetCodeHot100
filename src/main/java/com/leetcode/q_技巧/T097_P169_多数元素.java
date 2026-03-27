@@ -13,27 +13,27 @@ import java.util.*;
  */
 public class T097_P169_多数元素 {
 
-  public static void main(String[] args) {
-    T097_P169_多数元素 solution = new T097_P169_多数元素();
+    public static void main(String[] args) {
+        T097_P169_多数元素 solution = new T097_P169_多数元素();
 
-    int[] nums = {2, 2, 1, 1, 1, 2, 2};
-    int result = solution.majorityElement(nums);
-    System.out.println("输入: [2,2,1,1,1,2,2]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public int majorityElement(int[] nums) {
-    int count = 0;
-    Integer candidate = null;
-
-    for (int num : nums) {
-      if (count == 0) {
-        candidate = num;
-      }
-      count += (num == candidate) ? 1 : -1;
+        int[] nums = {2, 2, 1, 1, 1, 2, 2};
+        int result = solution.majorityElement(nums);
+        System.out.println("输入: [2,2,1,1,1,2,2]");
+        System.out.println("输出: " + result);
     }
 
-    return candidate;
-  }
+    // 解题代码
+    public int majorityElement(int[] nums) {
+        int count = 0;
+        Integer candidate = null;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        return candidate;
+    }
 }

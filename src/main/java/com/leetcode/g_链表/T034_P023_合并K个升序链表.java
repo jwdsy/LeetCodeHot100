@@ -1,6 +1,7 @@
 package com.leetcode.g_链表;
 
 import com.leetcode.util.ListNode;
+
 import java.util.*;
 
 /**
@@ -14,44 +15,44 @@ import java.util.*;
  */
 public class T034_P023_合并K个升序链表 {
 
-  public static void main(String[] args) {
-    T034_P023_合并K个升序链表 solution = new T034_P023_合并K个升序链表();
+    public static void main(String[] args) {
+        T034_P023_合并K个升序链表 solution = new T034_P023_合并K个升序链表();
 
-    // 创建三个有序链表
-    ListNode l1 = ListNode.createFromArray(new int[] {1, 4, 5});
-    ListNode l2 = ListNode.createFromArray(new int[] {1, 3, 4});
-    ListNode l3 = ListNode.createFromArray(new int[] {2, 6});
-    ListNode[] lists = {l1, l2, l3};
+        // 创建三个有序链表
+        ListNode l1 = ListNode.createFromArray(new int[]{1, 4, 5});
+        ListNode l2 = ListNode.createFromArray(new int[]{1, 3, 4});
+        ListNode l3 = ListNode.createFromArray(new int[]{2, 6});
+        ListNode[] lists = {l1, l2, l3};
 
-    ListNode result = solution.mergeKLists(lists);
-    System.out.println("输入: lists = [[1,4,5],[1,3,4],[2,6]]");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public ListNode mergeKLists(ListNode[] lists) {
-    if (lists == null || lists.length == 0) return null;
-
-    PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
-
-    for (ListNode node : lists) {
-      if (node != null) {
-        pq.offer(node);
-      }
+        ListNode result = solution.mergeKLists(lists);
+        System.out.println("输入: lists = [[1,4,5],[1,3,4],[2,6]]");
+        System.out.println("输出: " + result);
     }
 
-    ListNode dummy = new ListNode(0);
-    ListNode curr = dummy;
+    // 解题代码
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
 
-    while (!pq.isEmpty()) {
-      ListNode node = pq.poll();
-      curr.next = node;
-      curr = curr.next;
-      if (node.next != null) {
-        pq.offer(node.next);
-      }
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
+
+        for (ListNode node : lists) {
+            if (node != null) {
+                pq.offer(node);
+            }
+        }
+
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+
+        while (!pq.isEmpty()) {
+            ListNode node = pq.poll();
+            curr.next = node;
+            curr = curr.next;
+            if (node.next != null) {
+                pq.offer(node.next);
+            }
+        }
+
+        return dummy.next;
     }
-
-    return dummy.next;
-  }
 }

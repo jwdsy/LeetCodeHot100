@@ -11,31 +11,31 @@ package com.leetcode.n_贪心算法;
  */
 public class T078_P055_跳跃游戏 {
 
-  public boolean canJump(int[] nums) {
-    if (nums == null || nums.length == 0) return false;
+    public boolean canJump(int[] nums) {
+        if (nums == null || nums.length == 0) return false;
 
-    int cover = 0;
-    for (int i = 0; i < nums.length; i++) {
-      if (i > cover) {
-        return false;
-      }
-      cover = Math.max(cover, i + nums[i]);
-      if (cover >= nums.length - 1) {
+        int cover = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i > cover) {
+                return false;
+            }
+            cover = Math.max(cover, i + nums[i]);
+            if (cover >= nums.length - 1) {
+                return true;
+            }
+        }
+
         return true;
-      }
     }
 
-    return true;
-  }
+    public static void main(String[] args) {
+        T078_P055_跳跃游戏 solution = new T078_P055_跳跃游戏();
 
-  public static void main(String[] args) {
-    T078_P055_跳跃游戏 solution = new T078_P055_跳跃游戏();
+        // 测试用例
+        int[] nums1 = {2, 3, 1, 1, 4};
+        System.out.println("测试1: " + solution.canJump(nums1) + " (期望: true)");
 
-    // 测试用例
-    int[] nums1 = {2, 3, 1, 1, 4};
-    System.out.println("测试1: " + solution.canJump(nums1) + " (期望: true)");
-
-    int[] nums2 = {3, 2, 1, 0, 4};
-    System.out.println("测试2: " + solution.canJump(nums2) + " (期望: false)");
-  }
+        int[] nums2 = {3, 2, 1, 0, 4};
+        System.out.println("测试2: " + solution.canJump(nums2) + " (期望: false)");
+    }
 }

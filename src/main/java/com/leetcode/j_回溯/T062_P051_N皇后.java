@@ -14,66 +14,66 @@ import java.util.*;
  */
 public class T062_P051_N皇后 {
 
-  List<List<String>> result = new ArrayList<>();
-  Set<Integer> cols = new HashSet<>();
-  Set<Integer> diag1 = new HashSet<>(); // row - col
-  Set<Integer> diag2 = new HashSet<>(); // row + col
+    List<List<String>> result = new ArrayList<>();
+    Set<Integer> cols = new HashSet<>();
+    Set<Integer> diag1 = new HashSet<>(); // row - col
+    Set<Integer> diag2 = new HashSet<>(); // row + col
 
-  public List<List<String>> solveNQueens(int n) {
-    result.clear();
-    cols.clear();
-    diag1.clear();
-    diag2.clear();
+    public List<List<String>> solveNQueens(int n) {
+        result.clear();
+        cols.clear();
+        diag1.clear();
+        diag2.clear();
 
-    char[][] board = new char[n][n];
-    for (char[] row : board) {
-      Arrays.fill(row, '.');
+        char[][] board = new char[n][n];
+        for (char[] row : board) {
+            Arrays.fill(row, '.');
+        }
+
+        backtrack(n, 0, board);
+        return result;
     }
 
-    backtrack(n, 0, board);
-    return result;
-  }
+    private void backtrack(int n, int row, char[][] board) {
+        if (row == n) {
+            List<String> solution = new ArrayList<>();
+            for (char[] rowChars : board) {
+                solution.add(new String(rowChars));
+            }
+            result.add(solution);
+            return;
+        }
 
-  private void backtrack(int n, int row, char[][] board) {
-    if (row == n) {
-      List<String> solution = new ArrayList<>();
-      for (char[] rowChars : board) {
-        solution.add(new String(rowChars));
-      }
-      result.add(solution);
-      return;
+        for (int col = 0; col < n; col++) {
+            int d1 = row - col;
+            int d2 = row + col;
+
+            if (cols.contains(col) || diag1.contains(d1) || diag2.contains(d2)) {
+                continue;
+            }
+
+            board[row][col] = 'Q';
+            cols.add(col);
+            diag1.add(d1);
+            diag2.add(d2);
+
+            backtrack(n, row + 1, board);
+
+            board[row][col] = '.';
+            cols.remove(col);
+            diag1.remove(d1);
+            diag2.remove(d2);
+        }
     }
 
-    for (int col = 0; col < n; col++) {
-      int d1 = row - col;
-      int d2 = row + col;
+    public static void main(String[] args) {
+        T062_P051_N皇后 solution = new T062_P051_N皇后();
 
-      if (cols.contains(col) || diag1.contains(d1) || diag2.contains(d2)) {
-        continue;
-      }
+        // 测试用例
+        List<List<String>> result1 = solution.solveNQueens(4);
+        System.out.println("测试1: " + result1.size() + " 种解法 (期望: 2)");
 
-      board[row][col] = 'Q';
-      cols.add(col);
-      diag1.add(d1);
-      diag2.add(d2);
-
-      backtrack(n, row + 1, board);
-
-      board[row][col] = '.';
-      cols.remove(col);
-      diag1.remove(d1);
-      diag2.remove(d2);
+        List<List<String>> result2 = solution.solveNQueens(1);
+        System.out.println("测试2: " + result2.size() + " 种解法 (期望: 1)");
     }
-  }
-
-  public static void main(String[] args) {
-    T062_P051_N皇后 solution = new T062_P051_N皇后();
-
-    // 测试用例
-    List<List<String>> result1 = solution.solveNQueens(4);
-    System.out.println("测试1: " + result1.size() + " 种解法 (期望: 2)");
-
-    List<List<String>> result2 = solution.solveNQueens(1);
-    System.out.println("测试2: " + result2.size() + " 种解法 (期望: 1)");
-  }
 }

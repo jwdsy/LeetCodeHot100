@@ -12,49 +12,49 @@ package com.leetcode.k_二分查找;
  */
 public class T065_P034_在排序数组中查找元素的第一个和最后一个位置 {
 
-  public int[] searchRange(int[] nums, int target) {
-    int[] result = {-1, -1};
-    if (nums == null || nums.length == 0) return result;
+    public int[] searchRange(int[] nums, int target) {
+        int[] result = {-1, -1};
+        if (nums == null || nums.length == 0) return result;
 
-    // 找左边界
-    int left = 0, right = nums.length - 1;
-    while (left < right) {
-      int mid = left + (right - left) / 2;
-      if (nums[mid] < target) {
-        left = mid + 1;
-      } else {
-        right = mid;
-      }
+        // 找左边界
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        if (nums[left] == target) {
+            result[0] = left;
+        } else {
+            return result;
+        }
+
+        // 找右边界
+        right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (nums[mid] <= target) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        result[1] = left;
+
+        return result;
     }
-    if (nums[left] == target) {
-      result[0] = left;
-    } else {
-      return result;
+
+    public static void main(String[] args) {
+        T065_P034_在排序数组中查找元素的第一个和最后一个位置 solution = new T065_P034_在排序数组中查找元素的第一个和最后一个位置();
+
+        // 测试用例
+        int[] nums1 = {5, 7, 7, 8, 8, 10};
+        System.out.println(
+                "测试1: " + java.util.Arrays.toString(solution.searchRange(nums1, 8)) + " (期望: [3, 4])");
+        System.out.println(
+                "测试2: " + java.util.Arrays.toString(solution.searchRange(nums1, 6)) + " (期望: [-1, -1])");
     }
-
-    // 找右边界
-    right = nums.length - 1;
-    while (left < right) {
-      int mid = left + (right - left + 1) / 2;
-      if (nums[mid] <= target) {
-        left = mid;
-      } else {
-        right = mid - 1;
-      }
-    }
-    result[1] = left;
-
-    return result;
-  }
-
-  public static void main(String[] args) {
-    T065_P034_在排序数组中查找元素的第一个和最后一个位置 solution = new T065_P034_在排序数组中查找元素的第一个和最后一个位置();
-
-    // 测试用例
-    int[] nums1 = {5, 7, 7, 8, 8, 10};
-    System.out.println(
-        "测试1: " + java.util.Arrays.toString(solution.searchRange(nums1, 8)) + " (期望: [3, 4])");
-    System.out.println(
-        "测试2: " + java.util.Arrays.toString(solution.searchRange(nums1, 6)) + " (期望: [-1, -1])");
-  }
 }

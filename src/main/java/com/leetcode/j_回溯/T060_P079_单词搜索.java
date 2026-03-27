@@ -12,50 +12,50 @@ package com.leetcode.j_回溯;
  */
 public class T060_P079_单词搜索 {
 
-  public boolean exist(char[][] board, String word) {
-    if (board == null || board.length == 0 || word == null) return false;
+    public boolean exist(char[][] board, String word) {
+        if (board == null || board.length == 0 || word == null) return false;
 
-    int m = board.length, n = board[0].length;
-    boolean[][] visited = new boolean[m][n];
+        int m = board.length, n = board[0].length;
+        boolean[][] visited = new boolean[m][n];
 
-    for (int i = 0; i < m; i++) {
-      for (int j = 0; j < n; j++) {
-        if (dfs(board, word, i, j, 0, visited)) {
-          return true;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dfs(board, word, i, j, 0, visited)) {
+                    return true;
+                }
+            }
         }
-      }
+        return false;
     }
-    return false;
-  }
 
-  private boolean dfs(char[][] board, String word, int i, int j, int index, boolean[][] visited) {
-    if (index == word.length()) return true;
-    if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return false;
-    if (visited[i][j] || board[i][j] != word.charAt(index)) return false;
+    private boolean dfs(char[][] board, String word, int i, int j, int index, boolean[][] visited) {
+        if (index == word.length()) return true;
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return false;
+        if (visited[i][j] || board[i][j] != word.charAt(index)) return false;
 
-    visited[i][j] = true;
-    boolean found =
-        dfs(board, word, i + 1, j, index + 1, visited)
-            || dfs(board, word, i - 1, j, index + 1, visited)
-            || dfs(board, word, i, j + 1, index + 1, visited)
-            || dfs(board, word, i, j - 1, index + 1, visited);
-    visited[i][j] = false;
+        visited[i][j] = true;
+        boolean found =
+                dfs(board, word, i + 1, j, index + 1, visited)
+                        || dfs(board, word, i - 1, j, index + 1, visited)
+                        || dfs(board, word, i, j + 1, index + 1, visited)
+                        || dfs(board, word, i, j - 1, index + 1, visited);
+        visited[i][j] = false;
 
-    return found;
-  }
+        return found;
+    }
 
-  public static void main(String[] args) {
-    T060_P079_单词搜索 solution = new T060_P079_单词搜索();
+    public static void main(String[] args) {
+        T060_P079_单词搜索 solution = new T060_P079_单词搜索();
 
-    // 测试用例
-    char[][] board1 = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-    boolean result1 = solution.exist(board1, "ABCCED");
-    System.out.println("测试1: " + result1 + " (期望: true)");
+        // 测试用例
+        char[][] board1 = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
+        boolean result1 = solution.exist(board1, "ABCCED");
+        System.out.println("测试1: " + result1 + " (期望: true)");
 
-    boolean result2 = solution.exist(board1, "SEE");
-    System.out.println("测试2: " + result2 + " (期望: true)");
+        boolean result2 = solution.exist(board1, "SEE");
+        System.out.println("测试2: " + result2 + " (期望: true)");
 
-    boolean result3 = solution.exist(board1, "ABCB");
-    System.out.println("测试3: " + result3 + " (期望: false)");
-  }
+        boolean result3 = solution.exist(board1, "ABCB");
+        System.out.println("测试3: " + result3 + " (期望: false)");
+    }
 }

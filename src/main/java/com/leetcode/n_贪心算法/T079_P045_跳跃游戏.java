@@ -12,36 +12,36 @@ package com.leetcode.n_贪心算法;
  */
 public class T079_P045_跳跃游戏 {
 
-  public int jump(int[] nums) {
-    if (nums == null || nums.length <= 1) return 0;
+    public int jump(int[] nums) {
+        if (nums == null || nums.length <= 1) return 0;
 
-    int jumps = 0;
-    int currentEnd = 0;
-    int farthest = 0;
+        int jumps = 0;
+        int currentEnd = 0;
+        int farthest = 0;
 
-    for (int i = 0; i < nums.length - 1; i++) {
-      farthest = Math.max(farthest, i + nums[i]);
+        for (int i = 0; i < nums.length - 1; i++) {
+            farthest = Math.max(farthest, i + nums[i]);
 
-      if (i == currentEnd) {
-        jumps++;
-        currentEnd = farthest;
-        if (currentEnd >= nums.length - 1) {
-          break;
+            if (i == currentEnd) {
+                jumps++;
+                currentEnd = farthest;
+                if (currentEnd >= nums.length - 1) {
+                    break;
+                }
+            }
         }
-      }
+
+        return jumps;
     }
 
-    return jumps;
-  }
+    public static void main(String[] args) {
+        T079_P045_跳跃游戏 solution = new T079_P045_跳跃游戏();
 
-  public static void main(String[] args) {
-    T079_P045_跳跃游戏 solution = new T079_P045_跳跃游戏();
+        // 测试用例
+        int[] nums1 = {2, 3, 1, 1, 4};
+        System.out.println("测试1: " + solution.jump(nums1) + " (期望: 2)");
 
-    // 测试用例
-    int[] nums1 = {2, 3, 1, 1, 4};
-    System.out.println("测试1: " + solution.jump(nums1) + " (期望: 2)");
-
-    int[] nums2 = {2, 3, 0, 1, 4};
-    System.out.println("测试2: " + solution.jump(nums2) + " (期望: 2)");
-  }
+        int[] nums2 = {2, 3, 0, 1, 4};
+        System.out.println("测试2: " + solution.jump(nums2) + " (期望: 2)");
+    }
 }

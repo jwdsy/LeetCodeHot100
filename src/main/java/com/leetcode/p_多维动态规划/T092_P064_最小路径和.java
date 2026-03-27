@@ -12,37 +12,37 @@ package com.leetcode.p_多维动态规划;
  */
 public class T092_P064_最小路径和 {
 
-  public int minPathSum(int[][] grid) {
-    if (grid == null || grid.length == 0) return 0;
+    public int minPathSum(int[][] grid) {
+        if (grid == null || grid.length == 0) return 0;
 
-    int m = grid.length, n = grid[0].length;
-    int[] dp = new int[n];
+        int m = grid.length, n = grid[0].length;
+        int[] dp = new int[n];
 
-    for (int i = 0; i < m; i++) {
-      for (int j = 0; j < n; j++) {
-        if (i == 0 && j == 0) {
-          dp[j] = grid[i][j];
-        } else if (i == 0) {
-          dp[j] = dp[j - 1] + grid[i][j];
-        } else if (j == 0) {
-          dp[j] = dp[j] + grid[i][j];
-        } else {
-          dp[j] = Math.min(dp[j], dp[j - 1]) + grid[i][j];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j == 0) {
+                    dp[j] = grid[i][j];
+                } else if (i == 0) {
+                    dp[j] = dp[j - 1] + grid[i][j];
+                } else if (j == 0) {
+                    dp[j] = dp[j] + grid[i][j];
+                } else {
+                    dp[j] = Math.min(dp[j], dp[j - 1]) + grid[i][j];
+                }
+            }
         }
-      }
+
+        return dp[n - 1];
     }
 
-    return dp[n - 1];
-  }
+    public static void main(String[] args) {
+        T092_P064_最小路径和 solution = new T092_P064_最小路径和();
 
-  public static void main(String[] args) {
-    T092_P064_最小路径和 solution = new T092_P064_最小路径和();
+        // 测试用例
+        int[][] grid1 = {{1, 3, 1}, {1, 5, 1}, {4, 2, 1}};
+        System.out.println("测试1: " + solution.minPathSum(grid1) + " (期望: 7)");
 
-    // 测试用例
-    int[][] grid1 = {{1, 3, 1}, {1, 5, 1}, {4, 2, 1}};
-    System.out.println("测试1: " + solution.minPathSum(grid1) + " (期望: 7)");
-
-    int[][] grid2 = {{1, 2, 3}, {4, 5, 6}};
-    System.out.println("测试2: " + solution.minPathSum(grid2) + " (期望: 12)");
-  }
+        int[][] grid2 = {{1, 2, 3}, {4, 5, 6}};
+        System.out.println("测试2: " + solution.minPathSum(grid2) + " (期望: 12)");
+    }
 }

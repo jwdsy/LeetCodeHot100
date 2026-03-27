@@ -15,45 +15,45 @@ import java.util.*;
  */
 public class T009_P438_找到字符串中所有字母异位词 {
 
-  public static void main(String[] args) {
-    T009_P438_找到字符串中所有字母异位词 solution = new T009_P438_找到字符串中所有字母异位词();
+    public static void main(String[] args) {
+        T009_P438_找到字符串中所有字母异位词 solution = new T009_P438_找到字符串中所有字母异位词();
 
-    // 测试示例: s = "cbaebabacd", p = "abc"
-    String s = "cbaebabacd";
-    String p = "abc";
-    List<Integer> result = solution.findAnagrams(s, p);
-    System.out.println("输入: s = \"cbaebabacd\", p = \"abc\"");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public List<Integer> findAnagrams(String s, String p) {
-    List<Integer> result = new ArrayList<>();
-    if (s.length() < p.length()) return result;
-
-    int[] pCount = new int[26];
-    int[] sCount = new int[26];
-
-    // 统计 p 中字符频率
-    for (char c : p.toCharArray()) {
-      pCount[c - 'a']++;
+        // 测试示例: s = "cbaebabacd", p = "abc"
+        String s = "cbaebabacd";
+        String p = "abc";
+        List<Integer> result = solution.findAnagrams(s, p);
+        System.out.println("输入: s = \"cbaebabacd\", p = \"abc\"");
+        System.out.println("输出: " + result);
     }
 
-    int pLen = p.length();
-    for (int i = 0; i < s.length(); i++) {
-      // 加入窗口
-      sCount[s.charAt(i) - 'a']++;
+    // 解题代码
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+        if (s.length() < p.length()) return result;
 
-      // 移除窗口外的字符
-      if (i >= pLen) {
-        sCount[s.charAt(i - pLen) - 'a']--;
-      }
+        int[] pCount = new int[26];
+        int[] sCount = new int[26];
 
-      // 比较频率
-      if (i >= pLen - 1 && Arrays.equals(pCount, sCount)) {
-        result.add(i - pLen + 1);
-      }
+        // 统计 p 中字符频率
+        for (char c : p.toCharArray()) {
+            pCount[c - 'a']++;
+        }
+
+        int pLen = p.length();
+        for (int i = 0; i < s.length(); i++) {
+            // 加入窗口
+            sCount[s.charAt(i) - 'a']++;
+
+            // 移除窗口外的字符
+            if (i >= pLen) {
+                sCount[s.charAt(i - pLen) - 'a']--;
+            }
+
+            // 比较频率
+            if (i >= pLen - 1 && Arrays.equals(pCount, sCount)) {
+                result.add(i - pLen + 1);
+            }
+        }
+        return result;
     }
-    return result;
-  }
 }

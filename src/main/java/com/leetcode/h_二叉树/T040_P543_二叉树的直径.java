@@ -1,6 +1,7 @@
 package com.leetcode.h_二叉树;
 
 import com.leetcode.util.TreeNode;
+
 import java.util.*;
 
 /**
@@ -14,33 +15,33 @@ import java.util.*;
  */
 public class T040_P543_二叉树的直径 {
 
-  private int maxDiameter = 0;
+    private int maxDiameter = 0;
 
-  public static void main(String[] args) {
-    T040_P543_二叉树的直径 solution = new T040_P543_二叉树的直径();
+    public static void main(String[] args) {
+        T040_P543_二叉树的直径 solution = new T040_P543_二叉树的直径();
 
-    TreeNode root = new TreeNode(1);
-    root.left = new TreeNode(2);
-    root.right = new TreeNode(3);
-    root.left.left = new TreeNode(4);
-    root.left.right = new TreeNode(5);
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
 
-    int result = solution.diameterOfBinaryTree(root);
-    System.out.println("输出: " + result);
-  }
+        int result = solution.diameterOfBinaryTree(root);
+        System.out.println("输出: " + result);
+    }
 
-  // 解题代码
-  public int diameterOfBinaryTree(TreeNode root) {
-    maxDiameter = 0;
-    depth(root);
-    return maxDiameter;
-  }
+    // 解题代码
+    public int diameterOfBinaryTree(TreeNode root) {
+        maxDiameter = 0;
+        depth(root);
+        return maxDiameter;
+    }
 
-  private int depth(TreeNode node) {
-    if (node == null) return 0;
-    int left = depth(node.left);
-    int right = depth(node.right);
-    maxDiameter = Math.max(maxDiameter, left + right);
-    return 1 + Math.max(left, right);
-  }
+    private int depth(TreeNode node) {
+        if (node == null) return 0;
+        int left = depth(node.left);
+        int right = depth(node.right);
+        maxDiameter = Math.max(maxDiameter, left + right);
+        return 1 + Math.max(left, right);
+    }
 }

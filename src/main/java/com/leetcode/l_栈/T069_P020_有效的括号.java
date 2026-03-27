@@ -13,33 +13,33 @@ import java.util.*;
  */
 public class T069_P020_有效的括号 {
 
-  public static void main(String[] args) {
-    T069_P020_有效的括号 solution = new T069_P020_有效的括号();
+    public static void main(String[] args) {
+        T069_P020_有效的括号 solution = new T069_P020_有效的括号();
 
-    String s = "()[]{}";
-    boolean result = solution.isValid(s);
-    System.out.println("输入: s = \"()[]{}\"");
-    System.out.println("输出: " + result);
-  }
-
-  // 解题代码
-  public boolean isValid(String s) {
-    Stack<Character> stack = new Stack<>();
-    Map<Character, Character> map = new HashMap<>();
-    map.put(')', '(');
-    map.put(']', '[');
-    map.put('}', '{');
-
-    for (char c : s.toCharArray()) {
-      if (map.containsKey(c)) {
-        if (stack.isEmpty() || stack.pop() != map.get(c)) {
-          return false;
-        }
-      } else {
-        stack.push(c);
-      }
+        String s = "()[]{}";
+        boolean result = solution.isValid(s);
+        System.out.println("输入: s = \"()[]{}\"");
+        System.out.println("输出: " + result);
     }
 
-    return stack.isEmpty();
-  }
+    // 解题代码
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put(']', '[');
+        map.put('}', '{');
+
+        for (char c : s.toCharArray()) {
+            if (map.containsKey(c)) {
+                if (stack.isEmpty() || stack.pop() != map.get(c)) {
+                    return false;
+                }
+            } else {
+                stack.push(c);
+            }
+        }
+
+        return stack.isEmpty();
+    }
 }

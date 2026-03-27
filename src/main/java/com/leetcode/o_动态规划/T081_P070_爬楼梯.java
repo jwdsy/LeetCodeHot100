@@ -13,23 +13,23 @@ import java.util.*;
  */
 public class T081_P070_爬楼梯 {
 
-  public static void main(String[] args) {
-    T081_P070_爬楼梯 solution = new T081_P070_爬楼梯();
+    public static void main(String[] args) {
+        T081_P070_爬楼梯 solution = new T081_P070_爬楼梯();
 
-    int n = 3;
-    int result = solution.climbStairs(n);
-    System.out.println("n = " + n + ", 输出: " + result);
-  }
-
-  // 解题代码
-  public int climbStairs(int n) {
-    if (n <= 2) return n;
-    int prev1 = 2, prev2 = 1;
-    for (int i = 3; i <= n; i++) {
-      int curr = prev1 + prev2;
-      prev2 = prev1;
-      prev1 = curr;
+        int n = 3;
+        int result = solution.climbStairs(n);
+        System.out.println("n = " + n + ", 输出: " + result);
     }
-    return prev1;
-  }
+
+    // 解题代码
+    public int climbStairs(int n) {
+        if (n <= 2) return n;
+        int prev1 = 2, prev2 = 1;
+        for (int i = 3; i <= n; i++) {
+            int curr = prev1 + prev2;
+            prev2 = prev1;
+            prev1 = curr;
+        }
+        return prev1;
+    }
 }
