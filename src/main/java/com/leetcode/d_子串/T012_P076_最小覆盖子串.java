@@ -36,6 +36,12 @@ public class T012_P076_最小覆盖子串 {
             need[c]++;
         }
 
+        // 计算 t 中不同字符的种数
+        int required = 0;
+        for (int cnt : need) {
+            if (cnt > 0) required++;
+        }
+
         int left = 0, right = 0;
         int valid = 0;
         int start = 0;
@@ -52,7 +58,7 @@ public class T012_P076_最小覆盖子串 {
                 }
             }
 
-            while (valid == need.length) {
+            while (valid == required) {
                 if (right - left < minLen) {
                     start = left;
                     minLen = right - left;

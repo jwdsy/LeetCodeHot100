@@ -59,6 +59,7 @@ public class T033_P148_排序链表 {
     }
 
     private ListNode split(ListNode head, int size) {
+        if (head == null) return null;
         ListNode curr = head;
         for (int i = 1; i < size && curr.next != null; i++) {
             curr = curr.next;
@@ -82,7 +83,6 @@ public class T033_P148_排序链表 {
             curr = curr.next;
         }
         curr.next = (l1 != null) ? l1 : l2;
-        while (curr.next != null) curr = curr.next;
         return dummy.next;
     }
 }

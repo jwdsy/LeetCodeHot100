@@ -32,4 +32,32 @@ public class T081_P070_爬楼梯 {
         }
         return prev1;
     }
+
+    Map<Integer, Integer> map = new HashMap<>();
+
+    public int climbStairs2(int n) {
+        if (n <= 2) return n;
+        if (map.containsKey(n)) return map.get(n);
+        int result = climbStairs2(n - 1) + climbStairs2(n - 2);
+        map.put(n, result);
+        return result;
+    }
+
+    public int climbStairs3(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int result = 0;
+        int pre = 2;       // dp[i-1]，初始为 dp[2]=2
+        int prePre = 1;    // dp[i-2]，初始为 dp[1]=1
+        for (int i = 3; i <= n; i++) {
+            result = pre + prePre;
+            prePre = pre;
+            pre = result;
+        }
+        return result;
+    }
 }
