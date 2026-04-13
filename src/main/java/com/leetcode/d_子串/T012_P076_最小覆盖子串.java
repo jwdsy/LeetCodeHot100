@@ -25,57 +25,98 @@ public class T012_P076_最小覆盖子串 {
         System.out.println("输出: \"" + result + "\"");
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public String minWindow(String s, String t) {
+        return minWindow2(s, t);
+    }
+
+    // 方法1：枚举左端点并扩展右端点（时间 O(n^2)，空间 O(1)）
+    public String minWindow1(String s, String t) {
+        if (s == null || t == null || s.length() < t.length()) return "";
+        int[] requiredCount = new int[128];
+        for (char c : t.toCharArray()) {
+            requiredCount[c]++;
+        }
+        int bestLen = Integer.MAX_VALUE;
+        int bestStart = 0;
+        for (int left = 0; left < s.length(); left++) {
+            int[] windowCount = new int[128];
+            for (int right = left; right < s.length(); right++) {
+                windowCount[s.charAt(right)]++;
+                if (containsAll(windowCount, requiredCount)) {
+                    if (right - left + 1 < bestLen) {
+                        bestLen = right - left + 1;
+                        bestStart = left;
+                    }
+                    break;
+                }
+            }
+        }
+        return bestLen == Integer.MAX_VALUE ? "" : s.substring(bestStart, bestStart + bestLen);
+    }
+
+    // 方法2：滑动窗口（最优解法，时间 O(m+n)，空间 O(1)）
+    public String minWindow2(String s, String t) {
         if (s == null || t == null || s.length() < t.length()) return "";
 
-        int[] need = new int[128];
-        int[] window = new int[128];
+        int[] requiredCount = new int[128];
+        int[] windowCount = new int[128];
 
         for (char c : t.toCharArray()) {
-            need[c]++;
+            requiredCount[c]++;
         }
 
         // 计算 t 中不同字符的种数
-        int required = 0;
-        for (int cnt : need) {
-            if (cnt > 0) required++;
+        int requiredTypes = 0;
+        for (int count : requiredCount) {
+            if (count > 0) requiredTypes++;
         }
 
-        int left = 0, right = 0;
-        int valid = 0;
-        int start = 0;
+        int left = 0;
+        int right = 0;
+        int matchedTypes = 0;
+        int bestStart = 0;
         int minLen = Integer.MAX_VALUE;
 
         while (right < s.length()) {
-            char c = s.charAt(right);
+            char rightChar = s.charAt(right);
             right++;
 
-            if (need[c] > 0) {
-                window[c]++;
-                if (window[c] == need[c]) {
-                    valid++;
+            if (requiredCount[rightChar] > 0) {
+                windowCount[rightChar]++;
+                if (windowCount[rightChar] == requiredCount[rightChar]) {
+                    matchedTypes++;
                 }
             }
 
-            while (valid == required) {
+            while (matchedTypes == requiredTypes) {
                 if (right - left < minLen) {
-                    start = left;
+                    bestStart = left;
                     minLen = right - left;
                 }
 
-                char d = s.charAt(left);
+                char leftChar = s.charAt(left);
                 left++;
 
-                if (need[d] > 0) {
-                    if (window[d] == need[d]) {
-                        valid--;
+                if (requiredCount[leftChar] > 0) {
+                    // 当前字符即将移出窗口，先判断是否会破坏覆盖条件
+                    if (windowCount[leftChar] == requiredCount[leftChar]) {
+                        matchedTypes--;
                     }
-                    window[d]--;
+                    windowCount[leftChar]--;
                 }
             }
         }
 
-        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(bestStart, bestStart + minLen);
+    }
+
+    private boolean containsAll(int[] windowCount, int[] requiredCount) {
+        for (int index = 0; index < requiredCount.length; index++) {
+            if (windowCount[index] < requiredCount[index]) {
+                return false;
+            }
+        }
+        return true;
     }
 }

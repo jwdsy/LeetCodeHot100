@@ -21,11 +21,31 @@ public class T004_P283_移动零 {
         System.out.println("输出: " + java.util.Arrays.toString(nums));
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public void moveZeroes(int[] nums) {
+        moveZeroes2(nums);
+    }
+
+    // 方法1：额外数组收集非零元素（时间 O(n)，空间 O(n)）
+    public void moveZeroes1(int[] nums) {
+        int[] temp = new int[nums.length];
+        int index = 0;
+        for (int num : nums) {
+            if (num != 0) {
+                temp[index++] = num;
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = temp[i];
+        }
+    }
+
+    // 方法2：双指针原地交换（最优解法，时间 O(n)，空间 O(1)）
+    public void moveZeroes2(int[] nums) {
         int left = 0;
         for (int right = 0; right < nums.length; right++) {
             if (nums[right] != 0) {
+                // 将当前非零值交换到前面的“非零区”末尾
                 int temp = nums[left];
                 nums[left] = nums[right];
                 nums[right] = temp;

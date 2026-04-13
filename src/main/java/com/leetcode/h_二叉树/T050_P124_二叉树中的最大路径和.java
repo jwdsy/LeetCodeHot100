@@ -31,10 +31,13 @@ public class T050_P124_二叉树中的最大路径和 {
     }
 
     // 解题代码
+
+    // 解法
     public int maxPathSum(TreeNode root) {
         maxSum = Integer.MIN_VALUE;
         gain(root);
         return maxSum;
+
     }
 
     private int gain(TreeNode node) {

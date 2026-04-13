@@ -24,25 +24,46 @@ public class T017_P041_缺失的第一个正数 {
         System.out.println("输出: " + result);
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public int firstMissingPositive(int[] nums) {
-        int n = nums.length;
+        return firstMissingPositive2(nums);
+    }
 
-        for (int i = 0; i < n; i++) {
-            while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {
-                int idx = nums[i] - 1;
-                int temp = nums[idx];
-                nums[idx] = nums[i];
-                nums[i] = temp;
+    // 方法1：哈希集合（时间 O(n)，空间 O(n)）
+    public int firstMissingPositive1(int[] nums) {
+        Set<Integer> positiveSet = new HashSet<>();
+        for (int num : nums) {
+            if (num > 0) {
+                positiveSet.add(num);
+            }
+        }
+        int candidate = 1;
+        while (positiveSet.contains(candidate)) {
+            candidate++;
+        }
+        return candidate;
+    }
+
+    // 方法2：原地哈希（最优解法，时间 O(n)，空间 O(1)）
+    public int firstMissingPositive2(int[] nums) {
+        int length = nums.length;
+
+        for (int index = 0; index < length; index++) {
+            while (nums[index] >= 1 && nums[index] <= length && nums[nums[index] - 1] != nums[index]) {
+                // 把值 x 放到索引 x-1 的位置
+                int targetIndex = nums[index] - 1;
+                int temp = nums[targetIndex];
+                nums[targetIndex] = nums[index];
+                nums[index] = temp;
             }
         }
 
-        for (int i = 0; i < n; i++) {
-            if (nums[i] != i + 1) {
-                return i + 1;
+        for (int index = 0; index < length; index++) {
+            if (nums[index] != index + 1) {
+                return index + 1;
             }
         }
 
-        return n + 1;
+        return length + 1;
     }
 }

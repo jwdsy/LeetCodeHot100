@@ -27,6 +27,8 @@ public class T024_P234_回文链表 {
     }
 
     // 解题代码
+
+    // 解法：快慢指针 + 反转后半链表（时间 O(n)，空间 O(1)）
     public boolean isPalindrome(ListNode head) {
         if (head == null || head.next == null) return true;
 
@@ -42,33 +44,34 @@ public class T024_P234_回文链表 {
         ListNode secondHalf = reverseList(slow.next);
 
         // 比较
-        ListNode p1 = head;
-        ListNode p2 = secondHalf;
+        ListNode leftPointer = head;
+        ListNode rightPointer = secondHalf;
         boolean result = true;
-        while (p2 != null) {
-            if (p1.val != p2.val) {
+        while (rightPointer != null) {
+            if (leftPointer.val != rightPointer.val) {
                 result = false;
                 break;
             }
-            p1 = p1.next;
-            p2 = p2.next;
+            leftPointer = leftPointer.next;
+            rightPointer = rightPointer.next;
         }
 
         // 恢复链表（可选）
         slow.next = reverseList(secondHalf);
 
         return result;
+
     }
 
     private ListNode reverseList(ListNode head) {
-        ListNode prev = null;
-        ListNode curr = head;
-        while (curr != null) {
-            ListNode next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
+        ListNode previousNode = null;
+        ListNode currentNode = head;
+        while (currentNode != null) {
+            ListNode nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
         }
-        return prev;
+        return previousNode;
     }
 }

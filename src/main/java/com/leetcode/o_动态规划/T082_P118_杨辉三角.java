@@ -22,21 +22,25 @@ public class T082_P118_杨辉三角 {
     }
 
     // 解题代码
+
+    // 解法：逐行构造杨辉三角（时间 O(n^2)，空间 O(n^2)）
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> result = new ArrayList<>();
 
-        for (int i = 0; i < numRows; i++) {
+        for (int rowIndex = 0; rowIndex < numRows; rowIndex++) {
             List<Integer> row = new ArrayList<>();
-            for (int j = 0; j <= i; j++) {
-                if (j == 0 || j == i) {
+            for (int colIndex = 0; colIndex <= rowIndex; colIndex++) {
+                if (colIndex == 0 || colIndex == rowIndex) {
                     row.add(1);
                 } else {
-                    row.add(result.get(i - 1).get(j - 1) + result.get(i - 1).get(j));
+                    // 中间元素 = 上一行左上 + 右上
+                    row.add(result.get(rowIndex - 1).get(colIndex - 1) + result.get(rowIndex - 1).get(colIndex));
                 }
             }
             result.add(row);
         }
 
         return result;
+
     }
 }

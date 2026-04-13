@@ -29,17 +29,20 @@ public class T023_P206_反转链表 {
     }
 
     // 解题代码
-    public ListNode reverseList(ListNode head) {
-        ListNode prev = null;
-        ListNode curr = head;
 
-        while (curr != null) {
-            ListNode next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
+    // 解法：迭代反转（时间 O(n)，空间 O(1)）
+    public ListNode reverseList(ListNode head) {
+        ListNode previousNode = null;
+        ListNode currentNode = head;
+
+        while (currentNode != null) {
+            ListNode nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
         }
 
-        return prev;
+        return previousNode;
+
     }
 }

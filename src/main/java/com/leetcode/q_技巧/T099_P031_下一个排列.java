@@ -23,23 +23,26 @@ public class T099_P031_下一个排列 {
     }
 
     // 解题代码
+    // 解法：从后向前找“下降点”，交换后反转后缀（时间 O(n)，空间 O(1)）
     public void nextPermutation(int[] nums) {
-        int i = nums.length - 2;
-        while (i >= 0 && nums[i] >= nums[i + 1]) {
-            i--;
+        int pivotIndex = nums.length - 2;
+        while (pivotIndex >= 0 && nums[pivotIndex] >= nums[pivotIndex + 1]) {
+            pivotIndex--;
         }
 
-        if (i >= 0) {
-            int j = nums.length - 1;
-            while (j >= 0 && nums[j] <= nums[i]) {
-                j--;
+        if (pivotIndex >= 0) {
+            int successorIndex = nums.length - 1;
+            while (successorIndex >= 0 && nums[successorIndex] <= nums[pivotIndex]) {
+                successorIndex--;
             }
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
+            int temp = nums[pivotIndex];
+            nums[pivotIndex] = nums[successorIndex];
+            nums[successorIndex] = temp;
         }
 
-        reverse(nums, i + 1, nums.length - 1);
+        // 后缀原本是降序，反转后得到最小升序后缀
+        reverse(nums, pivotIndex + 1, nums.length - 1);
+
     }
 
     private void reverse(int[] nums, int left, int right) {

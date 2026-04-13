@@ -29,6 +29,8 @@ public class T045_P199_二叉树的右视图 {
     }
 
     // 解题代码
+
+    // 解法
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         if (root == null) return result;
@@ -47,5 +49,6 @@ public class T045_P199_二叉树的右视图 {
         }
 
         return result;
+
     }
 }

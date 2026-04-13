@@ -23,23 +23,26 @@ public class T069_P020_有效的括号 {
     }
 
     // 解题代码
-    public boolean isValid(String s) {
-        Stack<Character> stack = new Stack<>();
-        Map<Character, Character> map = new HashMap<>();
-        map.put(')', '(');
-        map.put(']', '[');
-        map.put('}', '{');
 
-        for (char c : s.toCharArray()) {
-            if (map.containsKey(c)) {
-                if (stack.isEmpty() || stack.pop() != map.get(c)) {
+    // 解法：栈匹配括号（时间 O(n)，空间 O(n)）
+    public boolean isValid(String s) {
+        Stack<Character> leftBracketStack = new Stack<>();
+        Map<Character, Character> rightToLeftBracket = new HashMap<>();
+        rightToLeftBracket.put(')', '(');
+        rightToLeftBracket.put(']', '[');
+        rightToLeftBracket.put('}', '{');
+
+        for (char currentChar : s.toCharArray()) {
+            if (rightToLeftBracket.containsKey(currentChar)) {
+                // 右括号必须与最近的左括号配对
+                if (leftBracketStack.isEmpty() || leftBracketStack.pop() != rightToLeftBracket.get(currentChar)) {
                     return false;
                 }
             } else {
-                stack.push(c);
+                leftBracketStack.push(currentChar);
             }
         }
 
-        return stack.isEmpty();
+        return leftBracketStack.isEmpty();
     }
 }

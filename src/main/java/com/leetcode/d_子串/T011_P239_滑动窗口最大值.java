@@ -25,30 +25,50 @@ public class T011_P239_滑动窗口最大值 {
         System.out.println("输出: " + Arrays.toString(result));
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public int[] maxSlidingWindow(int[] nums, int k) {
+        return maxSlidingWindow2(nums, k);
+    }
+
+    // 方法1：每个窗口单独扫描最大值（时间 O(n*k)，空间 O(1)）
+    public int[] maxSlidingWindow1(int[] nums, int k) {
+        if (nums == null || nums.length == 0) return new int[0];
+        int length = nums.length;
+        int[] result = new int[length - k + 1];
+        for (int windowStart = 0; windowStart <= length - k; windowStart++) {
+            int windowMax = nums[windowStart];
+            for (int index = windowStart + 1; index < windowStart + k; index++) {
+                windowMax = Math.max(windowMax, nums[index]);
+            }
+            result[windowStart] = windowMax;
+        }
+        return result;
+    }
+
+    // 方法2：单调队列（最优解法，时间 O(n)，空间 O(k)）
+    public int[] maxSlidingWindow2(int[] nums, int k) {
         if (nums == null || nums.length == 0) return new int[0];
 
-        int n = nums.length;
-        int[] result = new int[n - k + 1];
-        Deque<Integer> deque = new LinkedList<>();
+        int length = nums.length;
+        int[] result = new int[length - k + 1];
+        Deque<Integer> decreasingQueue = new LinkedList<>();
 
-        for (int i = 0; i < n; i++) {
+        for (int currentIndex = 0; currentIndex < length; currentIndex++) {
             // 移除不在窗口内的元素
-            while (!deque.isEmpty() && deque.peek() < i - k + 1) {
-                deque.poll();
+            while (!decreasingQueue.isEmpty() && decreasingQueue.peek() < currentIndex - k + 1) {
+                decreasingQueue.poll();
             }
 
             // 保持队列递减，移除比当前元素小的
-            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
-                deque.pollLast();
+            while (!decreasingQueue.isEmpty() && nums[decreasingQueue.peekLast()] < nums[currentIndex]) {
+                decreasingQueue.pollLast();
             }
 
-            deque.offer(i);
+            decreasingQueue.offer(currentIndex);
 
             // 记录窗口最大值
-            if (i >= k - 1) {
-                result[i - k + 1] = nums[deque.peek()];
+            if (currentIndex >= k - 1) {
+                result[currentIndex - k + 1] = nums[decreasingQueue.peek()];
             }
         }
 

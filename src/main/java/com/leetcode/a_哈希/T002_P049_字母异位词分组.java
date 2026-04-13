@@ -24,15 +24,39 @@ public class T002_P049_字母异位词分组 {
         System.out.println("输出: " + result);
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public List<List<String>> groupAnagrams(String[] strs) {
-        java.util.Map<String, List<String>> map = new java.util.HashMap<>();
+        return groupAnagrams2(strs);
+    }
+
+    // 方法1：排序后作为 key（时间 O(n*k*logk)，空间 O(n*k)）
+    public List<List<String>> groupAnagrams1(String[] strs) {
+        Map<String, List<String>> sortedKeyToGroup = new HashMap<>();
         for (String str : strs) {
             char[] charArray = str.toCharArray();
-            java.util.Arrays.sort(charArray);
-            String sortedStr = new String(charArray);
-            map.computeIfAbsent(sortedStr, k -> new java.util.ArrayList<>()).add(str);
+            Arrays.sort(charArray);
+            String sortedWord = new String(charArray);
+            sortedKeyToGroup.computeIfAbsent(sortedWord, key -> new ArrayList<>()).add(str);
         }
-        return new java.util.ArrayList<>(map.values());
+        return new ArrayList<>(sortedKeyToGroup.values());
+    }
+
+    // 方法2：字符频次数组编码（最优解法，时间 O(n*k)，空间 O(n*k)）
+    public List<List<String>> groupAnagrams2(String[] strs) {
+        Map<String, List<String>> frequencyKeyToGroup = new HashMap<>();
+        for (String str : strs) {
+            int[] characterFrequency = new int[26];
+            for (int index = 0; index < str.length(); index++) {
+                characterFrequency[str.charAt(index) - 'a']++;
+            }
+            StringBuilder keyBuilder = new StringBuilder();
+            for (int letterIndex = 0; letterIndex < 26; letterIndex++) {
+                // 使用分隔符避免频次拼接歧义，例如 1|11 与 11|1
+                keyBuilder.append('#').append(characterFrequency[letterIndex]);
+            }
+            String frequencyKey = keyBuilder.toString();
+            frequencyKeyToGroup.computeIfAbsent(frequencyKey, key -> new ArrayList<>()).add(str);
+        }
+        return new ArrayList<>(frequencyKeyToGroup.values());
     }
 }

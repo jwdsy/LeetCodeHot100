@@ -27,8 +27,11 @@ public class T043_P098_验证二叉搜索树 {
     }
 
     // 解题代码
+
+    // 解法
     public boolean isValidBST(TreeNode root) {
         return inorder(root);
+
     }
 
     private long prev = Long.MIN_VALUE;

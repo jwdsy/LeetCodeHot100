@@ -23,13 +23,36 @@ public class T008_P003_无重复字符的最长子串 {
         System.out.println("输出: " + result);
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public int lengthOfLongestSubstring(String s) {
-        java.util.Set<Character> set = new java.util.HashSet<>();
+        return lengthOfLongestSubstring2(s);
+    }
+
+    // 方法1：枚举起点并用集合判重（时间 O(n^2)，空间 O(n)）
+    public int lengthOfLongestSubstring1(String s) {
+        int maxLength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            Set<Character> seen = new HashSet<>();
+            for (int j = i; j < s.length(); j++) {
+                char c = s.charAt(j);
+                if (seen.contains(c)) {
+                    break;
+                }
+                seen.add(c);
+                maxLength = Math.max(maxLength, j - i + 1);
+            }
+        }
+        return maxLength;
+    }
+
+    // 方法2：滑动窗口 + 哈希集合（最优解法，时间 O(n)，空间 O(min(m,n))）
+    public int lengthOfLongestSubstring2(String s) {
+        Set<Character> set = new HashSet<>();
         int left = 0, maxLength = 0;
         for (int right = 0; right < s.length(); right++) {
             char c = s.charAt(right);
             while (set.contains(c)) {
+                // 左边界不断右移，直到窗口内不再有重复字符
                 set.remove(s.charAt(left));
                 left++;
             }

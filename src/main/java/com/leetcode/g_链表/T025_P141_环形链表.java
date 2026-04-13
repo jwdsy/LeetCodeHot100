@@ -34,6 +34,8 @@ public class T025_P141_环形链表 {
     }
 
     // 解题代码
+
+    // 解法：Floyd 快慢指针（时间 O(n)，空间 O(1)）
     public boolean hasCycle(ListNode head) {
         if (head == null || head.next == null) return false;
 

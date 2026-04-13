@@ -25,44 +25,45 @@ public class T018_P073_矩阵置零 {
     }
 
     // 解题代码
+    // 解法：首行首列做标记（时间 O(mn)，空间 O(1)）
     public void setZeroes(int[][] matrix) {
         if (matrix == null || matrix.length == 0) return;
 
-        int m = matrix.length;
-        int n = matrix[0].length;
+        int rowCount = matrix.length;
+        int colCount = matrix[0].length;
 
         boolean firstRowZero = false;
         boolean firstColZero = false;
 
         // 检查第一行和第一列是否有0
-        for (int i = 0; i < m; i++) {
-            if (matrix[i][0] == 0) {
+        for (int row = 0; row < rowCount; row++) {
+            if (matrix[row][0] == 0) {
                 firstColZero = true;
                 break;
             }
         }
-        for (int j = 0; j < n; j++) {
-            if (matrix[0][j] == 0) {
+        for (int col = 0; col < colCount; col++) {
+            if (matrix[0][col] == 0) {
                 firstRowZero = true;
                 break;
             }
         }
 
         // 用第一行和第一列标记其他位置
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                if (matrix[i][j] == 0) {
-                    matrix[i][0] = 0;
-                    matrix[0][j] = 0;
+        for (int row = 1; row < rowCount; row++) {
+            for (int col = 1; col < colCount; col++) {
+                if (matrix[row][col] == 0) {
+                    matrix[row][0] = 0;
+                    matrix[0][col] = 0;
                 }
             }
         }
 
         // 根据标记置零（不包括第一行和第一列）
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
-                    matrix[i][j] = 0;
+        for (int row = 1; row < rowCount; row++) {
+            for (int col = 1; col < colCount; col++) {
+                if (matrix[row][0] == 0 || matrix[0][col] == 0) {
+                    matrix[row][col] = 0;
                 }
             }
         }
@@ -72,9 +73,10 @@ public class T018_P073_矩阵置零 {
             Arrays.fill(matrix[0], 0);
         }
         if (firstColZero) {
-            for (int i = 0; i < m; i++) {
-                matrix[i][0] = 0;
+            for (int row = 0; row < rowCount; row++) {
+                matrix[row][0] = 0;
             }
         }
+
     }
 }

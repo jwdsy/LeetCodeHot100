@@ -25,16 +25,36 @@ public class T015_P189_轮转数组 {
         System.out.println("输出: " + Arrays.toString(nums));
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public void rotate(int[] nums, int k) {
+        rotate2(nums, k);
+    }
+
+    // 方法1：额外数组映射新位置（时间 O(n)，空间 O(n)）
+    public void rotate1(int[] nums, int k) {
+        if (nums == null || nums.length <= 1) return;
+        int length = nums.length;
+        k %= length;
+        int[] rotated = new int[length];
+        for (int index = 0; index < length; index++) {
+            rotated[(index + k) % length] = nums[index];
+        }
+        for (int index = 0; index < length; index++) {
+            nums[index] = rotated[index];
+        }
+    }
+
+    // 方法2：三次反转（最优解法，时间 O(n)，空间 O(1)）
+    public void rotate2(int[] nums, int k) {
         if (nums == null || nums.length <= 1) return;
 
-        int n = nums.length;
-        k = k % n;
+        int length = nums.length;
+        k = k % length;
 
-        reverse(nums, 0, n - 1);
+        // 三次反转：整体 -> 前 k -> 后 n-k
+        reverse(nums, 0, length - 1);
         reverse(nums, 0, k - 1);
-        reverse(nums, k, n - 1);
+        reverse(nums, k, length - 1);
     }
 
     private void reverse(int[] nums, int left, int right) {

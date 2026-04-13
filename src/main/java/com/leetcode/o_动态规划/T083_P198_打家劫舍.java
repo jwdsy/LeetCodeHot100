@@ -23,16 +23,21 @@ public class T083_P198_打家劫舍 {
     }
 
     // 解题代码
+
+    // 解法：滚动动态规划（时间 O(n)，空间 O(1)）
     public int rob(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         if (nums.length == 1) return nums[0];
 
-        int prev2 = 0, prev1 = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            int curr = Math.max(prev1, prev2 + nums[i]);
-            prev2 = prev1;
-            prev1 = curr;
+        int maxUntilPrevPrev = 0;
+        int maxUntilPrev = nums[0];
+        for (int houseIndex = 1; houseIndex < nums.length; houseIndex++) {
+            // 当前最优 = 不偷当前房(沿用上一个最优) 或 偷当前房(叠加上上个最优)
+            int currentMax = Math.max(maxUntilPrev, maxUntilPrevPrev + nums[houseIndex]);
+            maxUntilPrevPrev = maxUntilPrev;
+            maxUntilPrev = currentMax;
         }
-        return prev1;
+        return maxUntilPrev;
+
     }
 }

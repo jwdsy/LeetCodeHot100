@@ -26,34 +26,58 @@ public class T009_P438_找到字符串中所有字母异位词 {
         System.out.println("输出: " + result);
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public List<Integer> findAnagrams(String s, String p) {
-        List<Integer> result = new ArrayList<>();
-        if (s.length() < p.length()) return result;
+        return findAnagrams2(s, p);
+    }
 
-        int[] pCount = new int[26];
-        int[] sCount = new int[26];
+    // 方法1：对子串排序后比较（时间 O((n-m+1)*m*logm)，空间 O(m)）
+    public List<Integer> findAnagrams1(String s, String p) {
+        List<Integer> startIndices = new ArrayList<>();
+        if (s.length() < p.length()) return startIndices;
+        char[] pChars = p.toCharArray();
+        Arrays.sort(pChars);
+        String sortedP = new String(pChars);
+        int windowLength = p.length();
+        for (int windowStart = 0; windowStart <= s.length() - windowLength; windowStart++) {
+            char[] windowChars = s.substring(windowStart, windowStart + windowLength).toCharArray();
+            Arrays.sort(windowChars);
+            if (sortedP.equals(new String(windowChars))) {
+                startIndices.add(windowStart);
+            }
+        }
+        return startIndices;
+    }
+
+    // 方法2：滑动窗口 + 频次数组（最优解法，时间 O(n)，空间 O(1)）
+    public List<Integer> findAnagrams2(String s, String p) {
+        List<Integer> startIndices = new ArrayList<>();
+        if (s.length() < p.length()) return startIndices;
+
+        int[] targetFrequency = new int[26];
+        int[] windowFrequency = new int[26];
 
         // 统计 p 中字符频率
         for (char c : p.toCharArray()) {
-            pCount[c - 'a']++;
+            targetFrequency[c - 'a']++;
         }
 
-        int pLen = p.length();
-        for (int i = 0; i < s.length(); i++) {
+        int patternLength = p.length();
+        for (int windowEnd = 0; windowEnd < s.length(); windowEnd++) {
             // 加入窗口
-            sCount[s.charAt(i) - 'a']++;
+            windowFrequency[s.charAt(windowEnd) - 'a']++;
 
             // 移除窗口外的字符
-            if (i >= pLen) {
-                sCount[s.charAt(i - pLen) - 'a']--;
+            if (windowEnd >= patternLength) {
+                int windowStart = windowEnd - patternLength;
+                windowFrequency[s.charAt(windowStart) - 'a']--;
             }
 
-            // 比较频率
-            if (i >= pLen - 1 && Arrays.equals(pCount, sCount)) {
-                result.add(i - pLen + 1);
+            // 26 个字母的频次数组相同，说明当前窗口是一个异位词
+            if (windowEnd >= patternLength - 1 && Arrays.equals(targetFrequency, windowFrequency)) {
+                startIndices.add(windowEnd - patternLength + 1);
             }
         }
-        return result;
+        return startIndices;
     }
 }

@@ -31,6 +31,8 @@ public class T038_P226_翻转二叉树 {
     }
 
     // 解题代码
+
+    // 解法
     public TreeNode invertTree(TreeNode root) {
         if (root == null) return null;
 
@@ -42,5 +44,6 @@ public class T038_P226_翻转二叉树 {
         invertTree(root.right);
 
         return root;
+
     }
 }

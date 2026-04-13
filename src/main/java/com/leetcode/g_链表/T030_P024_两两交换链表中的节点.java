@@ -26,22 +26,25 @@ public class T030_P024_两两交换链表中的节点 {
     }
 
     // 解题代码
+
+    // 解法：迭代两两交换（时间 O(n)，空间 O(1)）
     public ListNode swapPairs(ListNode head) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode prev = dummy;
+        ListNode previousNode = dummy;
 
-        while (prev.next != null && prev.next.next != null) {
-            ListNode first = prev.next;
-            ListNode second = first.next;
+        while (previousNode.next != null && previousNode.next.next != null) {
+            ListNode firstNode = previousNode.next;
+            ListNode secondNode = firstNode.next;
 
-            first.next = second.next;
-            second.next = first;
-            prev.next = second;
+            firstNode.next = secondNode.next;
+            secondNode.next = firstNode;
+            previousNode.next = secondNode;
 
-            prev = first;
+            previousNode = firstNode;
         }
 
         return dummy.next;
+
     }
 }

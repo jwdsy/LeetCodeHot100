@@ -22,21 +22,63 @@ public class T007_P042_接雨水 {
         System.out.println("输出: " + result);
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法3）
     public int trap(int[] height) {
-        int left = 0, right = height.length - 1;
-        int leftMax = 0, rightMax = 0, water = 0;
+        return trap3(height);
+    }
+
+    // 方法1：按列计算（时间 O(n^2)，空间 O(1)）
+    public int trap1(int[] height) {
+        int water = 0;
+        for (int i = 1; i < height.length - 1; i++) {
+            int leftMax = 0;
+            int rightMax = 0;
+            for (int l = 0; l <= i; l++) leftMax = Math.max(leftMax, height[l]);
+            for (int r = i; r < height.length; r++) rightMax = Math.max(rightMax, height[r]);
+            water += Math.min(leftMax, rightMax) - height[i];
+        }
+        return water;
+    }
+
+    // 方法2：前后缀最大值数组（时间 O(n)，空间 O(n)）
+    public int trap2(int[] height) {
+        if (height.length == 0) return 0;
+        int length = height.length;
+        int[] maxLeftHeight = new int[length];
+        int[] maxRightHeight = new int[length];
+        maxLeftHeight[0] = height[0];
+        for (int index = 1; index < length; index++) {
+            maxLeftHeight[index] = Math.max(maxLeftHeight[index - 1], height[index]);
+        }
+        maxRightHeight[length - 1] = height[length - 1];
+        for (int index = length - 2; index >= 0; index--) {
+            maxRightHeight[index] = Math.max(maxRightHeight[index + 1], height[index]);
+        }
+        int trappedWater = 0;
+        for (int index = 1; index < length - 1; index++) {
+            trappedWater += Math.min(maxLeftHeight[index], maxRightHeight[index]) - height[index];
+        }
+        return trappedWater;
+    }
+
+    // 方法3：双指针（最优解法，时间 O(n)，空间 O(1)）
+    public int trap3(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int maxLeftHeight = 0;
+        int maxRightHeight = 0;
+        int trappedWater = 0;
         while (left < right) {
             if (height[left] < height[right]) {
-                if (height[left] >= leftMax) leftMax = height[left];
-                else water += leftMax - height[left];
+                if (height[left] >= maxLeftHeight) maxLeftHeight = height[left];
+                else trappedWater += maxLeftHeight - height[left]; // 当前列左侧更高，可接水
                 left++;
             } else {
-                if (height[right] >= rightMax) rightMax = height[right];
-                else water += rightMax - height[right];
+                if (height[right] >= maxRightHeight) maxRightHeight = height[right];
+                else trappedWater += maxRightHeight - height[right]; // 当前列右侧更高，可接水
                 right--;
             }
         }
-        return water;
+        return trappedWater;
     }
 }

@@ -35,6 +35,8 @@ public class T049_P236_二叉树的最近公共祖先 {
     }
 
     // 解题代码
+
+    // 解法
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) return root;
 
@@ -43,5 +45,6 @@ public class T049_P236_二叉树的最近公共祖先 {
 
         if (left != null && right != null) return root;
         return left != null ? left : right;
+
     }
 }

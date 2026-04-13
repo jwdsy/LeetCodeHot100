@@ -27,28 +27,31 @@ public class T031_P025_K个一组翻转链表 {
     }
 
     // 解题代码
+
+    // 解法：按 k 分组原地反转（时间 O(n)，空间 O(1)）
     public ListNode reverseKGroup(ListNode head, int k) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode pre = dummy;
+        ListNode previousGroupTail = dummy;
 
         while (head != null) {
-            ListNode tail = pre;
+            ListNode groupTail = previousGroupTail;
             for (int i = 0; i < k; i++) {
-                tail = tail.next;
-                if (tail == null) return dummy.next;
+                groupTail = groupTail.next;
+                if (groupTail == null) return dummy.next;
             }
-            ListNode next = tail.next;
-            ListNode[] newHead = reverse(head, tail);
-            head = newHead[0];
-            tail = newHead[1];
-            pre.next = head;
-            tail.next = next;
-            pre = tail;
-            head = next;
+            ListNode nextGroupHead = groupTail.next;
+            ListNode[] reversedPair = reverse(head, groupTail);
+            ListNode reversedHead = reversedPair[0];
+            ListNode reversedTail = reversedPair[1];
+            previousGroupTail.next = reversedHead;
+            reversedTail.next = nextGroupHead;
+            previousGroupTail = reversedTail;
+            head = nextGroupHead;
         }
 
         return dummy.next;
+
     }
 
     private ListNode[] reverse(ListNode head, ListNode tail) {

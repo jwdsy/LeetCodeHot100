@@ -23,6 +23,8 @@ public class T097_P169_多数元素 {
     }
 
     // 解题代码
+
+    // 解法
     public int majorityElement(int[] nums) {
         int count = 0;
         Integer candidate = null;
@@ -35,5 +37,6 @@ public class T097_P169_多数元素 {
         }
 
         return candidate;
+
     }
 }

@@ -30,22 +30,24 @@ public class T046_P114_二叉树展开为链表 {
     }
 
     // 解题代码
+    // 解法：后序展开左右子树，再把左链拼到右侧（时间 O(n)，空间 O(height)）
     public void flatten(TreeNode root) {
         if (root == null) return;
 
         flatten(root.left);
         flatten(root.right);
 
-        TreeNode left = root.left;
-        TreeNode right = root.right;
+        TreeNode leftSubtree = root.left;
+        TreeNode rightSubtree = root.right;
 
         root.left = null;
-        root.right = left;
+        root.right = leftSubtree;
 
-        TreeNode curr = root;
-        while (curr.right != null) {
-            curr = curr.right;
+        TreeNode tail = root;
+        while (tail.right != null) {
+            tail = tail.right;
         }
-        curr.right = right;
+        tail.right = rightSubtree;
+
     }
 }

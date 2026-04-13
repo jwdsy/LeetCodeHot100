@@ -26,15 +26,33 @@ public class T001_P001_两数之和 {
         System.out.println("输出: " + java.util.Arrays.toString(result));
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public int[] twoSum(int[] nums, int target) {
-        java.util.Map<Integer, Integer> map = new java.util.HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
-            if (map.containsKey(complement)) {
-                return new int[]{map.get(complement), i};
+        return twoSum2(nums, target);
+    }
+
+    // 方法1：暴力枚举（时间 O(n^2)，空间 O(1)）
+    public int[] twoSum1(int[] nums, int target) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
             }
-            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    // 方法2：哈希表（最优解法，时间 O(n)，空间 O(n)）
+    public int[] twoSum2(int[] nums, int target) {
+        Map<Integer, Integer> valueToIndex = new HashMap<>();
+        for (int currentIndex = 0; currentIndex < nums.length; currentIndex++) {
+            int complement = target - nums[currentIndex];
+            // 若补数已出现，直接返回补数下标和当前下标
+            if (valueToIndex.containsKey(complement)) {
+                return new int[]{valueToIndex.get(complement), currentIndex};
+            }
+            valueToIndex.put(nums[currentIndex], currentIndex);
         }
         throw new IllegalArgumentException("No two sum solution");
     }

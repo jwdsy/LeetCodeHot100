@@ -31,10 +31,13 @@ public class T040_P543_二叉树的直径 {
     }
 
     // 解题代码
+
+    // 解法
     public int diameterOfBinaryTree(TreeNode root) {
         maxDiameter = 0;
         depth(root);
         return maxDiameter;
+
     }
 
     private int depth(TreeNode node) {

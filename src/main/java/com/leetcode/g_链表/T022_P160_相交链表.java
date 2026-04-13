@@ -39,17 +39,21 @@ public class T022_P160_相交链表 {
     }
 
     // 解题代码
+
+    // 解法：双指针交替遍历（时间 O(m+n)，空间 O(1)）
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;
 
-        ListNode pA = headA;
-        ListNode pB = headB;
+        ListNode pointerA = headA;
+        ListNode pointerB = headB;
 
-        while (pA != pB) {
-            pA = (pA == null) ? headB : pA.next;
-            pB = (pB == null) ? headA : pB.next;
+        // 两指针都走过 A+B 的长度后，会在交点或 null 处对齐
+        while (pointerA != pointerB) {
+            pointerA = (pointerA == null) ? headB : pointerA.next;
+            pointerB = (pointerB == null) ? headA : pointerB.next;
         }
 
-        return pA;
+        return pointerA;
+
     }
 }

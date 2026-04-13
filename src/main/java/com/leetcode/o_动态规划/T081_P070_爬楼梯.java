@@ -22,42 +22,35 @@ public class T081_P070_爬楼梯 {
     }
 
     // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）。
     public int climbStairs(int n) {
-        if (n <= 2) return n;
-        int prev1 = 2, prev2 = 1;
-        for (int i = 3; i <= n; i++) {
-            int curr = prev1 + prev2;
-            prev2 = prev1;
-            prev1 = curr;
-        }
-        return prev1;
+        return climbStairs2(n);
     }
 
-    Map<Integer, Integer> map = new HashMap<>();
+    private final Map<Integer, Integer> memoizedWays = new HashMap<>();
 
+    // 方法1：记忆化搜索（时间 O(n)，空间 O(n)）
+    public int climbStairs1(int n) {
+        if (n <= 2) return n;
+        if (memoizedWays.containsKey(n)) return memoizedWays.get(n);
+        // 状态转移：f(n)=f(n-1)+f(n-2)
+        int result = climbStairs1(n - 1) + climbStairs1(n - 2);
+        memoizedWays.put(n, result);
+        return result;
+    }
+
+    // 方法2：动态规划滚动变量（最优解法，时间 O(n)，空间 O(1)）
     public int climbStairs2(int n) {
         if (n <= 2) return n;
-        if (map.containsKey(n)) return map.get(n);
-        int result = climbStairs2(n - 1) + climbStairs2(n - 2);
-        map.put(n, result);
-        return result;
-    }
+        int waysOneStepBefore = 2;   // 到达 i-1 阶的方法数
+        int waysTwoStepsBefore = 1;  // 到达 i-2 阶的方法数
+        for (int currentStep = 3; currentStep <= n; currentStep++) {
+            // 当前阶的方法数 = 前一阶 + 前两阶
+            int currentWays = waysOneStepBefore + waysTwoStepsBefore;
+            waysTwoStepsBefore = waysOneStepBefore;
+            waysOneStepBefore = currentWays;
+        }
+        return waysOneStepBefore;
 
-    public int climbStairs3(int n) {
-        if (n == 1) {
-            return 1;
-        }
-        if (n == 2) {
-            return 2;
-        }
-        int result = 0;
-        int pre = 2;       // dp[i-1]，初始为 dp[2]=2
-        int prePre = 1;    // dp[i-2]，初始为 dp[1]=1
-        for (int i = 3; i <= n; i++) {
-            result = pre + prePre;
-            prePre = pre;
-            pre = result;
-        }
-        return result;
     }
 }

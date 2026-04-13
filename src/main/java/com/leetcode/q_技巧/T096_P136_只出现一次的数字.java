@@ -23,11 +23,14 @@ public class T096_P136_只出现一次的数字 {
     }
 
     // 解题代码
+
+    // 解法
     public int singleNumber(int[] nums) {
         int result = 0;
         for (int num : nums) {
             result ^= num;
         }
         return result;
+
     }
 }

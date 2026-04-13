@@ -26,30 +26,33 @@ public class T020_P048_旋转图像 {
     }
 
     // 解题代码
+    // 解法：主对角线转置 + 每行反转（时间 O(n^2)，空间 O(1)）
     public void rotate(int[][] matrix) {
         if (matrix == null || matrix.length <= 1) return;
 
-        int n = matrix.length;
+        int size = matrix.length;
 
         // 转置矩阵
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                int temp = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = temp;
+        for (int row = 0; row < size; row++) {
+            for (int col = row + 1; col < size; col++) {
+                int temp = matrix[row][col];
+                matrix[row][col] = matrix[col][row];
+                matrix[col][row] = temp;
             }
         }
 
         // 每行反转
-        for (int i = 0; i < n; i++) {
-            int left = 0, right = n - 1;
+        for (int row = 0; row < size; row++) {
+            int left = 0;
+            int right = size - 1;
             while (left < right) {
-                int temp = matrix[i][left];
-                matrix[i][left] = matrix[i][right];
-                matrix[i][right] = temp;
+                int temp = matrix[row][left];
+                matrix[row][left] = matrix[row][right];
+                matrix[row][right] = temp;
                 left++;
                 right--;
             }
         }
+
     }
 }

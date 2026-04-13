@@ -23,22 +23,49 @@ public class T003_P128_最长连续序列 {
         System.out.println("输出: " + result);
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public int longestConsecutive(int[] nums) {
+        return longestConsecutive2(nums);
+    }
+
+    // 方法1：先排序再统计连续段（时间 O(n log n)，空间 O(1) 或 O(log n)）
+    public int longestConsecutive1(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
-        java.util.Set<Integer> numSet = new java.util.HashSet<>();
-        for (int num : nums) numSet.add(num);
-        int longestStreak = 0;
-        for (int num : numSet) {
-            if (!numSet.contains(num - 1)) {
-                int currentNum = num, currentStreak = 1;
-                while (numSet.contains(currentNum + 1)) {
-                    currentNum++;
-                    currentStreak++;
-                }
-                longestStreak = Math.max(longestStreak, currentStreak);
+        Arrays.sort(nums);
+        int longestLength = 1;
+        int currentLength = 1;
+        for (int index = 1; index < nums.length; index++) {
+            if (nums[index] == nums[index - 1]) {
+                continue;
+            }
+            if (nums[index] == nums[index - 1] + 1) {
+                currentLength++;
+            } else {
+                longestLength = Math.max(longestLength, currentLength);
+                currentLength = 1;
             }
         }
-        return longestStreak;
+        return Math.max(longestLength, currentLength);
+    }
+
+    // 方法2：哈希集合找连续起点（最优解法，时间 O(n)，空间 O(n)）
+    public int longestConsecutive2(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        Set<Integer> uniqueNumbers = new HashSet<>();
+        for (int number : nums) uniqueNumbers.add(number);
+        int longestLength = 0;
+        for (int number : uniqueNumbers) {
+            // 仅从连续段起点开始扩展，确保每个数字最多被访问一次
+            if (!uniqueNumbers.contains(number - 1)) {
+                int currentNumber = number;
+                int currentLength = 1;
+                while (uniqueNumbers.contains(currentNumber + 1)) {
+                    currentNumber++;
+                    currentLength++;
+                }
+                longestLength = Math.max(longestLength, currentLength);
+            }
+        }
+        return longestLength;
     }
 }

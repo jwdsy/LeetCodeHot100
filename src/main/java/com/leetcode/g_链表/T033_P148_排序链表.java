@@ -26,36 +26,39 @@ public class T033_P148_排序链表 {
     }
 
     // 解题代码
+
+    // 解法：自底向上归并排序（时间 O(n log n)，空间 O(1)）
     public ListNode sortList(ListNode head) {
         if (head == null || head.next == null) return head;
 
         int length = 0;
-        ListNode curr = head;
-        while (curr != null) {
+        ListNode currentNode = head;
+        while (currentNode != null) {
             length++;
-            curr = curr.next;
+            currentNode = currentNode.next;
         }
 
         ListNode dummy = new ListNode(0);
         dummy.next = head;
 
         for (int subSize = 1; subSize < length; subSize <<= 1) {
-            ListNode prev = dummy;
-            ListNode currHead = dummy.next;
+            ListNode mergedTail = dummy;
+            ListNode currentHead = dummy.next;
 
-            while (currHead != null) {
-                ListNode head1 = currHead;
+            while (currentHead != null) {
+                ListNode head1 = currentHead;
                 ListNode head2 = split(head1, subSize);
-                currHead = split(head2, subSize);
+                currentHead = split(head2, subSize);
                 ListNode merged = merge(head1, head2);
-                prev.next = merged;
-                while (prev.next != null) {
-                    prev = prev.next;
+                mergedTail.next = merged;
+                while (mergedTail.next != null) {
+                    mergedTail = mergedTail.next;
                 }
             }
         }
 
         return dummy.next;
+
     }
 
     private ListNode split(ListNode head, int size) {

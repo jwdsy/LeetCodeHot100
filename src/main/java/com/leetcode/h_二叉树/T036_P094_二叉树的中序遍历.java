@@ -28,10 +28,13 @@ public class T036_P094_二叉树的中序遍历 {
     }
 
     // 解题代码
+
+    // 解法
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         inorder(root, result);
         return result;
+
     }
 
     private void inorder(TreeNode node, List<Integer> result) {

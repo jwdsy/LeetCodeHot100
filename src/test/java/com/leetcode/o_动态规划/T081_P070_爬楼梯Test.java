@@ -47,14 +47,14 @@ class T081_P070_爬楼梯Test {
     }
 
     @Test
-    @DisplayName("三种解法结果一致")
-    void testThreeMethodsConsistent() {
+    @DisplayName("两种解法结果一致")
+    void testTwoMethodsConsistent() {
         for (int n = 1; n <= 10; n++) {
             int r1 = solution.climbStairs(n);
-            int r2 = solution.climbStairs2(n);
-            int r3 = solution.climbStairs3(n);
-            assertEquals(r1, r2, "climbStairs2 与 climbStairs 不一致，n=" + n);
-            assertEquals(r1, r3, "climbStairs3 与 climbStairs 不一致，n=" + n);
+            int r2 = solution.climbStairs1(n);
+            int r3 = solution.climbStairs2(n);
+            assertEquals(r1, r2, "climbStairs 与 climbStairs1 不一致，n=" + n);
+            assertEquals(r1, r3, "climbStairs 与 climbStairs2 不一致，n=" + n);
         }
     }
 }

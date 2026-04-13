@@ -33,6 +33,8 @@ public class T026_P142_环形链表 {
     }
 
     // 解题代码
+
+    // 解法：快慢指针 + 相遇点推导入口（时间 O(n)，空间 O(1)）
     public ListNode detectCycle(ListNode head) {
         if (head == null || head.next == null) return null;
 
@@ -48,7 +50,7 @@ public class T026_P142_环形链表 {
 
         if (fast == null || fast.next == null) return null;
 
-        // 重置到头节点
+        // 一个指针回到头节点，两者同速前进，再次相遇即入口
         slow = head;
         while (slow != fast) {
             slow = slow.next;
@@ -56,5 +58,6 @@ public class T026_P142_环形链表 {
         }
 
         return slow;
+
     }
 }

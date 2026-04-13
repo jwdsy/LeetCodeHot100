@@ -32,8 +32,11 @@ public class T039_P101_对称二叉树 {
     }
 
     // 解题代码
+
+    // 解法
     public boolean isSymmetric(TreeNode root) {
         return isMirror(root, root);
+
     }
 
     private boolean isMirror(TreeNode t1, TreeNode t2) {

@@ -29,24 +29,27 @@ public class T032_P138_随机链表的复制 {
     }
 
     // 解题代码
+
+    // 解法：哈希映射原节点与新节点（时间 O(n)，空间 O(n)）
     public Node copyRandomList(Node head) {
         if (head == null) return null;
 
-        Map<Node, Node> map = new HashMap<>();
-        Node curr = head;
+        Map<Node, Node> originalToCopy = new HashMap<>();
+        Node currentNode = head;
 
-        while (curr != null) {
-            map.put(curr, new Node(curr.val));
-            curr = curr.next;
+        while (currentNode != null) {
+            originalToCopy.put(currentNode, new Node(currentNode.val));
+            currentNode = currentNode.next;
         }
 
-        curr = head;
-        while (curr != null) {
-            map.get(curr).next = map.get(curr.next);
-            map.get(curr).random = map.get(curr.random);
-            curr = curr.next;
+        currentNode = head;
+        while (currentNode != null) {
+            originalToCopy.get(currentNode).next = originalToCopy.get(currentNode.next);
+            originalToCopy.get(currentNode).random = originalToCopy.get(currentNode.random);
+            currentNode = currentNode.next;
         }
 
-        return map.get(head);
+        return originalToCopy.get(head);
+
     }
 }

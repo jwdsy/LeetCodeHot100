@@ -25,15 +25,19 @@ public class T019_P054_螺旋矩阵 {
     }
 
     // 解题代码
+
+    // 解法：按层遍历四条边（时间 O(mn)，空间 O(1)）
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> result = new ArrayList<>();
         if (matrix == null || matrix.length == 0) return result;
 
-        int m = matrix.length;
-        int n = matrix[0].length;
+        int rowCount = matrix.length;
+        int colCount = matrix[0].length;
 
-        int top = 0, bottom = m - 1;
-        int left = 0, right = n - 1;
+        int top = 0;
+        int bottom = rowCount - 1;
+        int left = 0;
+        int right = colCount - 1;
 
         while (top <= bottom && left <= right) {
             // 从左到右
@@ -66,5 +70,6 @@ public class T019_P054_螺旋矩阵 {
         }
 
         return result;
+
     }
 }

@@ -23,22 +23,26 @@ public class T098_P075_颜色分类 {
     }
 
     // 解题代码
+    // 解法：荷兰国旗三指针（时间 O(n)，空间 O(1)）
     public void sortColors(int[] nums) {
-        int left = 0, right = nums.length - 1, curr = 0;
+        int nextZeroIndex = 0;
+        int nextTwoIndex = nums.length - 1;
+        int currentIndex = 0;
 
-        while (curr <= right) {
-            if (nums[curr] == 0) {
-                nums[curr] = nums[left];
-                nums[left] = 0;
-                left++;
-                curr++;
-            } else if (nums[curr] == 2) {
-                nums[curr] = nums[right];
-                nums[right] = 2;
-                right--;
+        while (currentIndex <= nextTwoIndex) {
+            if (nums[currentIndex] == 0) {
+                nums[currentIndex] = nums[nextZeroIndex];
+                nums[nextZeroIndex] = 0;
+                nextZeroIndex++;
+                currentIndex++;
+            } else if (nums[currentIndex] == 2) {
+                nums[currentIndex] = nums[nextTwoIndex];
+                nums[nextTwoIndex] = 2;
+                nextTwoIndex--;
             } else {
-                curr++;
+                currentIndex++;
             }
         }
+
     }
 }

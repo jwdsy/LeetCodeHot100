@@ -24,18 +24,44 @@ public class T006_P015_三数之和 {
         System.out.println("输出: " + result);
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> res = new java.util.ArrayList<>();
-        java.util.Arrays.sort(nums);
+        return threeSum2(nums);
+    }
+
+    // 方法1：排序 + 哈希去重（时间 O(n^2)，空间 O(n^2)）
+    public List<List<Integer>> threeSum1(int[] nums) {
+        Arrays.sort(nums);
+        Set<List<Integer>> resultSet = new HashSet<>();
         for (int i = 0; i < nums.length - 2; i++) {
-            if (nums[i] > 0) break;
-            if (i > 0 && nums[i] == nums[i - 1]) continue;
-            int left = i + 1, right = nums.length - 1;
+            Set<Integer> seen = new HashSet<>();
+            for (int j = i + 1; j < nums.length; j++) {
+                int need = -nums[i] - nums[j];
+                if (seen.contains(need)) {
+                    List<Integer> triple = Arrays.asList(nums[i], need, nums[j]);
+                    triple.sort(Integer::compareTo);
+                    resultSet.add(triple);
+                }
+                seen.add(nums[j]);
+            }
+        }
+        return new ArrayList<>(resultSet);
+    }
+
+    // 方法2：排序 + 双指针（最优解法，时间 O(n^2)，空间 O(log n)）
+    public List<List<Integer>> threeSum2(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+        for (int firstIndex = 0; firstIndex < nums.length - 2; firstIndex++) {
+            if (nums[firstIndex] > 0) break;
+            if (firstIndex > 0 && nums[firstIndex] == nums[firstIndex - 1]) continue;
+            int left = firstIndex + 1;
+            int right = nums.length - 1;
             while (left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
+                int sum = nums[firstIndex] + nums[left] + nums[right];
                 if (sum == 0) {
-                    res.add(java.util.Arrays.asList(nums[i], nums[left], nums[right]));
+                    result.add(Arrays.asList(nums[firstIndex], nums[left], nums[right]));
+                    // 跳过重复值，避免重复三元组
                     while (left < right && nums[left] == nums[left + 1]) left++;
                     while (left < right && nums[right] == nums[right - 1]) right--;
                     left++;
@@ -44,6 +70,6 @@ public class T006_P015_三数之和 {
                 else right--;
             }
         }
-        return res;
+        return result;
     }
 }

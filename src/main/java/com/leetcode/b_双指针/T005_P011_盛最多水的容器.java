@@ -21,12 +21,30 @@ public class T005_P011_盛最多水的容器 {
         System.out.println("输出: " + result);
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public int maxArea(int[] height) {
+        return maxArea2(height);
+    }
+
+    // 方法1：暴力枚举所有左右边界（时间 O(n^2)，空间 O(1)）
+    public int maxArea1(int[] height) {
+        int max = 0;
+        for (int i = 0; i < height.length - 1; i++) {
+            for (int j = i + 1; j < height.length; j++) {
+                int area = Math.min(height[i], height[j]) * (j - i);
+                max = Math.max(max, area);
+            }
+        }
+        return max;
+    }
+
+    // 方法2：双指针夹逼（最优解法，时间 O(n)，空间 O(1)）
+    public int maxArea2(int[] height) {
         int left = 0, right = height.length - 1, maxArea = 0;
         while (left < right) {
             int area = Math.min(height[left], height[right]) * (right - left);
             maxArea = Math.max(maxArea, area);
+            // 移动短板，才有可能在宽度变小的同时让高度变大
             if (height[left] < height[right]) left++;
             else right--;
         }

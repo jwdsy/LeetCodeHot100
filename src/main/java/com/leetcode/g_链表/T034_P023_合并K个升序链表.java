@@ -30,29 +30,32 @@ public class T034_P023_合并K个升序链表 {
     }
 
     // 解题代码
+
+    // 解法：最小堆逐步弹出最小节点（时间 O(N log k)，空间 O(k)）
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists == null || lists.length == 0) return null;
 
-        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>(Comparator.comparingInt(node -> node.val));
 
         for (ListNode node : lists) {
             if (node != null) {
-                pq.offer(node);
+                minHeap.offer(node);
             }
         }
 
         ListNode dummy = new ListNode(0);
-        ListNode curr = dummy;
+        ListNode currentNode = dummy;
 
-        while (!pq.isEmpty()) {
-            ListNode node = pq.poll();
-            curr.next = node;
-            curr = curr.next;
+        while (!minHeap.isEmpty()) {
+            ListNode node = minHeap.poll();
+            currentNode.next = node;
+            currentNode = currentNode.next;
             if (node.next != null) {
-                pq.offer(node.next);
+                minHeap.offer(node.next);
             }
         }
 
         return dummy.next;
+
     }
 }

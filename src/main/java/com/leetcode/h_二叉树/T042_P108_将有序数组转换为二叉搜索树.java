@@ -24,8 +24,11 @@ public class T042_P108_将有序数组转换为二叉搜索树 {
     }
 
     // 解题代码
+
+    // 解法
     public TreeNode sortedArrayToBST(int[] nums) {
         return buildBST(nums, 0, nums.length - 1);
+
     }
 
     private TreeNode buildBST(int[] nums, int left, int right) {

@@ -28,22 +28,26 @@ public class T027_P021_合并两个有序链表 {
     }
 
     // 解题代码
+
+    // 解法：迭代合并（时间 O(m+n)，空间 O(1)）
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(0);
-        ListNode curr = dummy;
+        ListNode currentNode = dummy;
 
         while (l1 != null && l2 != null) {
             if (l1.val <= l2.val) {
-                curr.next = l1;
+                currentNode.next = l1;
                 l1 = l1.next;
             } else {
-                curr.next = l2;
+                currentNode.next = l2;
                 l2 = l2.next;
             }
-            curr = curr.next;
+            currentNode = currentNode.next;
         }
 
-        curr.next = (l1 != null) ? l1 : l2;
+        // 直接挂上剩余链表
+        currentNode.next = (l1 != null) ? l1 : l2;
         return dummy.next;
+
     }
 }

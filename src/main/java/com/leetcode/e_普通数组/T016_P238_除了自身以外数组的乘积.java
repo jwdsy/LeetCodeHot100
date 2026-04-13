@@ -24,22 +24,52 @@ public class T016_P238_除了自身以外数组的乘积 {
         System.out.println("输出: " + Arrays.toString(result));
     }
 
-    // 解题代码
+    // 对外保留原方法名，默认调用最优解法（方法2）
     public int[] productExceptSelf(int[] nums) {
-        int n = nums.length;
-        int[] answer = new int[n];
+        return productExceptSelf2(nums);
+    }
+
+    // 方法1：总乘积 + 零计数（时间 O(n)，空间 O(1)）
+    public int[] productExceptSelf1(int[] nums) {
+        int length = nums.length;
+        int[] result = new int[length];
+        int zeroCount = 0;
+        long nonZeroProduct = 1;
+        for (int num : nums) {
+            if (num == 0) {
+                zeroCount++;
+            } else {
+                nonZeroProduct *= num;
+            }
+        }
+        for (int index = 0; index < length; index++) {
+            if (zeroCount > 1) {
+                result[index] = 0;
+            } else if (zeroCount == 1) {
+                result[index] = nums[index] == 0 ? (int) nonZeroProduct : 0;
+            } else {
+                result[index] = (int) (nonZeroProduct / nums[index]);
+            }
+        }
+        return result;
+    }
+
+    // 方法2：前后缀乘积（最优解法，时间 O(n)，空间 O(1)）
+    public int[] productExceptSelf2(int[] nums) {
+        int length = nums.length;
+        int[] answer = new int[length];
 
         // 计算前缀积
         answer[0] = 1;
-        for (int i = 1; i < n; i++) {
-            answer[i] = answer[i - 1] * nums[i - 1];
+        for (int index = 1; index < length; index++) {
+            answer[index] = answer[index - 1] * nums[index - 1];
         }
 
         // 乘上后缀积
-        int suffix = 1;
-        for (int i = n - 1; i >= 0; i--) {
-            answer[i] *= suffix;
-            suffix *= nums[i];
+        int suffixProduct = 1;
+        for (int index = length - 1; index >= 0; index--) {
+            answer[index] *= suffixProduct;
+            suffixProduct *= nums[index];
         }
 
         return answer;

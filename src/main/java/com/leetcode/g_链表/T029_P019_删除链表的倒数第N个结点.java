@@ -27,6 +27,8 @@ public class T029_P019_删除链表的倒数第N个结点 {
     }
 
     // 解题代码
+
+    // 解法：快慢指针间隔 n（时间 O(L)，空间 O(1)）
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
@@ -34,6 +36,7 @@ public class T029_P019_删除链表的倒数第N个结点 {
         ListNode fast = dummy;
         ListNode slow = dummy;
 
+        // fast 先走 n+1 步，让 slow 停在待删除节点前一位
         for (int i = 0; i <= n; i++) {
             fast = fast.next;
         }
@@ -45,5 +48,6 @@ public class T029_P019_删除链表的倒数第N个结点 {
 
         slow.next = slow.next.next;
         return dummy.next;
+
     }
 }

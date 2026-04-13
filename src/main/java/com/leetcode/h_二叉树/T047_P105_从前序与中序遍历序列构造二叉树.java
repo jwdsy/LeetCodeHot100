@@ -27,11 +27,13 @@ public class T047_P105_从前序与中序遍历序列构造二叉树 {
     // 解题代码
     private Map<Integer, Integer> indexMap = new HashMap<>();
 
+    // 解法
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         for (int i = 0; i < inorder.length; i++) {
             indexMap.put(inorder[i], i);
         }
         return build(preorder, 0, preorder.length - 1, 0, inorder.length - 1);
+
     }
 
     private TreeNode build(int[] preorder, int preStart, int preEnd, int inStart, int inEnd) {

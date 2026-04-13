@@ -29,6 +29,8 @@ public class T044_P230_二叉搜索树中第K小的元素 {
     }
 
     // 解题代码
+
+    // 解法
     public int kthSmallest(TreeNode root, int k) {
         Stack<TreeNode> stack = new Stack<>();
         TreeNode curr = root;
@@ -45,5 +47,6 @@ public class T044_P230_二叉搜索树中第K小的元素 {
         }
 
         return -1;
+
     }
 }
